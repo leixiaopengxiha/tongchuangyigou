@@ -24,6 +24,10 @@
             "path" : "components/as/as",
             "style" : {}
         }
+        ,{
+            "path" : "pages/ab/ab",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
