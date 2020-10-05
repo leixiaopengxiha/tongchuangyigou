@@ -1,0 +1,52 @@
+{
+	"pages": [{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "启动页",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/homes/homes",
+			"style": {
+				"navigationBarTitleText": "sdd"
+			}
+		},
+		{
+			"path": "pages/about/about",
+			"style": {
+				"navigationBarTitleText": "关于"
+			}
+		}
+	    ,{
+            "path" : "components/as/as",
+            "style" : {}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#007AFF",
+		"backgroundColor": "#FFFFFF"
+	},
+
+	"tabBar": {
+		"color": "#e6b514",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/homes/homes",
+			"iconPath": "static/image/icon_component.png",
+			"selectedIconPath": "static/image/icon_component_HL.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/about/about",
+			"iconPath": "static/image/icon_API.png",
+			"selectedIconPath": "static/image/icon_API_HL.png",
+			"text": "关于"
+		}]
+	}
+}
