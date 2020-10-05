@@ -1,6 +1,6 @@
 <template>
 	<view>
-		点击省电模式
+		广场
 	</view>
 </template>
 
