@@ -11,22 +11,31 @@
 		{
 			"path": "pages/homes/homes",
 			"style": {
-				"navigationBarTitleText": "sdd"
+				"navigationBarTitleText": "首页"
 			}
-		},
-		{
-			"path": "pages/about/about",
-			"style": {
-				"navigationBarTitleText": "关于"
+		},{
+            "path" : "pages/release/release",
+            "style" : {
+				"navigationBarTitleText": "发布"
 			}
-		}
-	    ,{
-            "path" : "components/as/as",
-            "style" : {}
         }
         ,{
-            "path" : "pages/ab/ab",
-            "style" : {}
+            "path" : "pages/square/square",
+            "style" : {
+				"navigationBarTitleText":"广场"
+			}
+        }
+        ,{
+            "path" : "pages/news/news",
+            "style" : {
+				"navigationBarTitleText":"消息"
+			}
+        }
+        ,{
+            "path" : "pages/mys/mys",
+            "style" : {
+				"navigationBarTitleText":"我的"
+			}
         }
     ],
 	"globalStyle": {
@@ -41,16 +50,32 @@
 		"selectedColor": "#3cc51f",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
+		"fontSize":"14px",
 		"list": [{
 			"pagePath": "pages/homes/homes",
-			"iconPath": "static/image/icon_component.png",
-			"selectedIconPath": "static/image/icon_component_HL.png",
+			"iconPath": "static/image/shouye@2x.png",
+			"selectedIconPath": "static/image/shouye@3x.png",
 			"text": "首页"
-		}, {
-			"pagePath": "pages/about/about",
-			"iconPath": "static/image/icon_API.png",
-			"selectedIconPath": "static/image/icon_API_HL.png",
-			"text": "关于"
+		},{
+			"pagePath": "pages/square/square",
+			"iconPath": "static/image/guangchang2@2x.png",
+			"selectedIconPath": "static/image/guangchang@2x.png",
+			"text": "广场"
+		},{
+			"pagePath": "pages/release/release",
+			"iconPath": "static/image/fabu@3x.png",
+			"selectedIconPath": "static/image/fabu@3x.png",
+			"text": "发布"
+		},{
+			"pagePath": "pages/news/news",
+			"iconPath": "static/image/xiaoxi@2x.png",
+			"selectedIconPath": "static/image/xiaoxi2@2x.png",
+			"text": "消息"
+		},{
+			"pagePath": "pages/mys/mys",
+			"iconPath": "static/image/wode1@2x.png",
+			"selectedIconPath": "static/image/wode2@2x.png",
+			"text": "我的"
 		}]
 	}
 }
