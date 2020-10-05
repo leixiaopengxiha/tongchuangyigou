@@ -3,7 +3,7 @@ var onReadyCallbacks = [];
 var isServiceReady = false;
 var onServiceReadyCallbacks = [];
 var __uniConfig = {
-    "pages": ["pages/index/index", "pages/homes/homes", "pages/release/release", "pages/square/square", "pages/news/news", "pages/mys/mys", "pages/aaa/aaa"],
+    "pages": ["pages/index/index", "pages/homes/homes", "pages/release/release", "pages/square/square", "pages/news/news", "pages/mys/mys"],
     "window": {
         "navigationBarTextStyle": "white",
         "navigationBarTitleText": "uni-app",
@@ -113,10 +113,6 @@ var __uniRoutes = [{
     "window": {
         "navigationBarTitleText": "我的"
     }
-}, {
-    "path": "/pages/aaa/aaa",
-    "meta": {},
-    "window": {}
 }];
 __uniConfig.onReady = function (callback) {
     if (__uniConfig.ready) {
