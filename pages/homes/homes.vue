@@ -1,6 +1,6 @@
 <template>
 	<view>
-		首页
+		首页啊
 		{{a}}
 		<button @click="btn">点击</button>
 		<navigator url="/pages/about/about" hover-class="navigator-hover">
@@ -9,6 +9,7 @@
 		 <navigator url="/pages/index/index" open-type="switchTab" hover-class="other-navigator-hover">
 		     <button type="default">跳转tab页面</button>
 		 </navigator>
+		
 	</view>
 </template>
 
@@ -16,10 +17,13 @@
 	export default {
 		data() {
 			return {
-				a:0
+				a:0,
 			}
 		},
 		methods: {
+			fabclick(){
+				console.log('ss')
+			},
 			btn(){
 				uni.showModal({
 				    title: '清除launchFlag值',
@@ -53,5 +57,11 @@
 </script>
 
 <style>
-
+	
+.fab{
+/* 	position: fixed;
+	left: 50%; */
+	background: #007AFF;
+	color: #007AFF;
+}
 </style>

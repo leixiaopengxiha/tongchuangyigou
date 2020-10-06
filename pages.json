@@ -50,7 +50,7 @@
 		"selectedColor": "#3cc51f",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"fontSize":"14px",
+		"fontSize":"13px",
 		"list": [{
 			"pagePath": "pages/homes/homes",
 			"iconPath": "static/image/shouye@2x.png",
@@ -62,11 +62,6 @@
 			"selectedIconPath": "static/image/guangchang@2x.png",
 			"text": "广场"
 		},{
-			"pagePath": "pages/release/release",
-			"iconPath": "static/image/fabu@3x.png",
-			"selectedIconPath": "static/image/fabu@3x.png",
-			"text": "发布"
-		},{
 			"pagePath": "pages/news/news",
 			"iconPath": "static/image/xiaoxi@2x.png",
 			"selectedIconPath": "static/image/xiaoxi2@2x.png",
@@ -76,6 +71,12 @@
 			"iconPath": "static/image/wode1@2x.png",
 			"selectedIconPath": "static/image/wode2@2x.png",
 			"text": "我的"
-		}]
+		}],
+		"midButton": {
+			"width": "63px",
+			"height": "63px",
+			"iconPath": "static/image/fabu@2x.png",
+			"iconWidth": "55px"
+		}
 	}
 }

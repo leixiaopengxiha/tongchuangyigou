@@ -25,9 +25,7 @@
                  try {
                      // 获取本地存储中launchFlag标识
                      const value = uni.getStorageSync('launchFlag');
-
                      if (value) {
-						 console.log('launchFlag')
                          // launchFlag=true直接跳转到首页
                          uni.switchTab({
                              url: '/pages/homes/homes'
