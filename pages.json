@@ -11,31 +11,32 @@
 		{
 			"path": "pages/homes/homes",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},{
             "path" : "pages/release/release",
             "style" : {
 				"navigationBarTitleText": "发布"
 			}
-        }
-        ,{
+        },{
             "path" : "pages/square/square",
             "style" : {
 				"navigationBarTitleText":"广场"
 			}
-        }
-        ,{
+        },{
             "path" : "pages/news/news",
             "style" : {
 				"navigationBarTitleText":"消息"
 			}
-        }
-        ,{
+        },{
             "path" : "pages/mys/mys",
             "style" : {
 				"navigationBarTitleText":"我的"
 			}
+<<<<<<< HEAD
         },
 		{
 		    "path" : "components/uni-release-topic/uni-release-topic",
@@ -49,6 +50,18 @@
 				"navigationBarTitleText":"发布闲置"
 			}
 		}
+=======
+        }
+        ,{
+            "path" : "pages/search/search",
+            "style" : {
+				"app-plus": {
+					"titleNView": false,
+					"softinputNavBar": "none"
+				}
+			}
+        }
+>>>>>>> main
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
