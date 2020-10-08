@@ -1,0 +1,1 @@
+<view><view class="outer"><view class="outbox"><view class="leftBox box"><image src="../../static/img/商品.png" mode></image></view><view class="rightBox box"><image src="../../static/img/记事本.png" mode></image></view></view><button data-event-opts="{{[['tap',[['tuor',['$event']]]]]}}" class="tui" bindtap="__e">-</button></view></view>

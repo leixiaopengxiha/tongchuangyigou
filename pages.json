@@ -36,7 +36,19 @@
             "style" : {
 				"navigationBarTitleText":"我的"
 			}
-        }
+        },
+		{
+		    "path" : "components/uni-release-topic/uni-release-topic",
+		    "style" : {
+				"navigationBarTitleText":"发布主题"
+			}
+		},
+		{
+		    "path" : "components/uni-release-free/uni-release-free",
+		    "style" : {
+				"navigationBarTitleText":"发布闲置"
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
