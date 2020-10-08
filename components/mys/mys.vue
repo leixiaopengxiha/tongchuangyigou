@@ -1,26 +1,21 @@
 <template>
-	<Mys/>
+	<my-home></my-home>
 </template>
 
 <script>
-	import Mys from '@/components/mys/mys.vue'
+	import MyHome from '@/components/uni-my/my-home/my-home.vue'
 	export default {
-		name:'My',
-		components:{
-			Mys
-		},
+		name:'Mys',
+		components:{MyHome},
 	  data() {
 	    return {
-	      
 	    }
 	  },
 	  methods: {
 	   
 	  }
 	}
-
 </script>
 
 <style>
-
 </style>

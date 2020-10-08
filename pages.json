@@ -34,14 +34,59 @@
         ,{
             "path" : "pages/mys/mys",
             "style" : {
-				"navigationBarTitleText":"我的"
+				"navigationBarTitleText":"我的",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
-        }
+        },
+		{
+		    "path" : "components/uni-my/my-setup/Setting",
+		    "style" : {
+				"navigationBarTitleText":"设置"
+			}
+		},
+		{
+		    "path" : "components/uni-my/my-sellorder/my-sellorder",
+		    "style" : {
+				"navigationBarTitleText":"全部订单"
+			}
+		},
+		{
+		    "path" : "components/uni-my/my-buyorder/my-buyorder",
+		    "style" : {
+				"navigationBarTitleText":"全部订单"
+			}
+		},
+		{
+		    "path" : "components/uni-my/my-homepage/my-homepage",
+		    "style" : {
+				"navigationBarTitleText":"个人主页"
+			}
+		},
+		{
+		    "path" : "components/uni-my/my-follow/my-follow",
+		    "style" : {
+				"navigationBarTitleText":"我关注的人"
+			}
+		},
+		{
+		    "path" : "components/uni-my/homepage-fans/homepage-fans",
+		    "style" : {
+				"navigationBarTitleText":"我的粉丝"
+			}
+		},
+		{
+		    "path" : "components/uni-my/my-setup/Setting_news",
+		    "style" : {
+				"navigationBarTitleText":"消息设置"
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#007AFF",
+		"navigationBarBackgroundColor": "#28D2D1",
 		"backgroundColor": "#FFFFFF"
 	},
 
