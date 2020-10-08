@@ -3,7 +3,6 @@ export default {
 	onLaunch: function() {
 		console.log('App Launch');
 		uni.onTabBarMidButtonTap(function(e){
-			console.log(uni)
 			uni.redirectTo({
 			    url: '/pages/release/release'
 			});

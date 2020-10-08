@@ -1,28 +1,24 @@
 <template>
 	<view>
-		首页啊
-		{{a}}
-		<button @click="btn">点击</button>
-		<navigator url="/pages/about/about" hover-class="navigator-hover">
-		    <button type="default">跳转到新页面</button>
-		</navigator>
-		 <navigator url="/pages/index/index" open-type="switchTab" hover-class="other-navigator-hover">
-		     <button type="default">跳转tab页面</button>
-		 </navigator>
-		
+		<homes></homes>
 	</view>
 </template>
 
 <script>
 	export default {
+		name:'home',
+		components:{
+			
+		},
 		data() {
 			return {
-				a:0,
+
 			}
 		},
 		methods: {
-			fabclick(){
-				console.log('ss')
+				
+			btnss(){
+				
 			},
 			btn(){
 				uni.showModal({
