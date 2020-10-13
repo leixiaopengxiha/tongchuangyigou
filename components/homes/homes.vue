@@ -42,7 +42,6 @@
 				uni.navigateTo({
 				    url: '/pages/search/search',
 					 animationType: 'none',
-
 				});
 			}
 		}

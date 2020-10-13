@@ -1,15 +1,16 @@
 <template>
 	<view class="follow-box">
 		<view class="follow-context" v-for="item in people">
-			<image :src="item.img" mode=""></image>
+			<image :src="item.photourl" mode=""></image>
 			<view class="follow-mess">
-				<text style="font-size: 5vw;">{{item.name}}</text>
-				<text class="follow-synopsis">{{item.synopsis}}</text>
-				<text style="margin-top: 1vh; color: #CCCCCC;">{{item.num}}位粉丝</text>
+				<text style="font-size: 5vw;">{{item.nickname}}</text>
+				<view class="follow-synopsis">{{item.signature}}</view>
+				<text style="margin-top: 1vh; color: #CCCCCC;">{{item.fans}}位粉丝</text>
 			</view>
-			<view class="follow-btn" :class="item.follow==true?'':'nofollow'" @click="onchange(item)">
+			<view class="follow-btn">+关注</view>
+			<!-- <view class="follow-btn" :class="item.follow==true?'':'nofollow'" @click="onchange(item)">
 				{{item.follow==true?'已关注':'+关注'}}
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -18,44 +19,26 @@
 	export default {
 		data() {
 			return {
-				people: [{
-						id: 1,
-						img: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/img/cat-11.png',
-						name: '飘雪victoria',
-						synopsis: '90后狮子座女生。计算机专业，喜欢摄影，喜欢看书',
-						num: 50,
-						follow: false
-					},
-					{
-						id: 2,
-						img: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/img/cat-11.png',
-						name: '飘雪victoria',
-						synopsis: '90后狮子座女生。计算机专业，喜欢摄影，喜欢看书',
-						num: 50,
-						follow: true
-					},
-					{
-						id: 3,
-						img: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/img/cat-11.png',
-						name: '飘雪victoria',
-						synopsis: '90后狮子座女生。计算机专业，喜欢摄影，喜欢看书',
-						num: 50,
-						follow: false
-					},
-					{
-						id: 4,
-						img: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/img/cat-11.png',
-						name: '飘雪victoria',
-						synopsis: '90后狮子座女生。计算机专业，喜欢摄影，喜欢看书',
-						num: 50,
-						follow: true
-					}
-				]
+				people: []
 			}
 		},
+		mounted() {
+			this.qingqiu()
+		},
 		methods: {
-			onchange(obj) {
-				obj.follow = !obj.follow
+			// onchange(obj) {
+			// 	obj.follow = !obj.follow
+			// },
+			qingqiu(){
+				uni.request({
+					url:"http://132.232.89.22:8848/allfollow",
+					method:"POST",
+					data:{"username":"18035852945"},
+					success:({data})=>{
+						console.log(data.data.fans)
+						this.people = data.data.fans
+					}
+				})
 			}
 		}
 	}
@@ -109,7 +92,7 @@
 	}
 
 	.follow-btn {
-		width: 65vw;
+		width: 20vw;
 		height: 5vh;
 		border: 1px solid #ddd;
 		text-align: center;

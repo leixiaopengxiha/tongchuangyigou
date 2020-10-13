@@ -58,12 +58,15 @@
 			},
 			// 退出登录的按钮
 			signOut() {
-				uni.clearStorage('FirstLogin')
-				setTimeout(() => {
-					uni.hideToast();
-					plus.runtime.restart()
-				}, 2000)
-				done()
+				// uni.clearStorage('FirstLogin')
+				// setTimeout(() => {
+				// 	uni.hideToast();
+				// 	plus.runtime.restart()
+				// }, 2000)
+				// done()
+				uni.redirectTo({
+					url: '/pages/login/login'
+				})
 				console.log('退出登录')
 			}
 		}

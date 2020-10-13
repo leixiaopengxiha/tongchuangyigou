@@ -75,6 +75,12 @@
         "navigationBarTitleText": "个人主页"
       }
     },
+	{
+	  "path": "components/uni-my/edit-meas/edit-meas",
+	  "style": {
+	    "navigationBarTitleText": "编辑资料"
+	  }
+	},
     {
       "path": "components/uni-my/my-follow/my-follow",
       "style": {
@@ -105,6 +111,13 @@
         "navigationBarTitleText": "发布闲置"
       }
     },
+	{
+	  "path": "pages/login/login",
+	  "style": {
+	    "navigationBarTitleText": "登录",
+		"softinputNavBar": "none"
+	  }
+	},
     {
       "path": "pages/search/search",
       "style": {
@@ -114,7 +127,11 @@
         }
       }
     }
-  ],
+      ,{
+            "path" : "components/uni-my/edit-meas/edit-meas",
+            "style" : {}
+        }
+    ],
   "globalStyle": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-app",

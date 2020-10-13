@@ -58,7 +58,6 @@
 		data() {
 			return {
 				contentIndex: 0,
-				
 				twoNavs: ['推荐', '最新', '数码产品', '图书文具', '服饰鞋包', '美妆闲置', '体育用品', '服饰鞋包', '美妆闲置'],
 				productlist:[
 					{
