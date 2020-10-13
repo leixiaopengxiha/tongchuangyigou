@@ -26,7 +26,7 @@
 					</text>
 				</view>
 			</view>
-			<view class="homepage_edit">
+			<view class="homepage_edit" @click="onedit">
 				编辑资料
 			</view>
 		</view>
@@ -50,8 +50,9 @@
 					<view class="content_my" v-if="current === 1">
 						<view class="content_my_box" v-for="item in postlist">
 							<image style="width: 40vw; height: 20vh;" :src="item.image"></image>
-							<text class="content_my_name">{{item.name}}</text>
-							<text style="width: 17vw;font-size: 12px;color: #999999; float: right;display: block;">{{item.people}}人点赞</text>
+							<view class="content_my_name">{{item.name}}</view>
+						
+							<view class="mypeople">{{item.people}}人点赞</view>
 						</view>
 					</view>
 					<view class="" v-if="current === 2">
@@ -129,6 +130,11 @@
 			}
 		},
 		methods: {
+			onedit(){
+				uni.navigateTo({
+					url:'/components/uni-my/edit-meas/edit-meas'
+				})
+			},
 			onClickItem(e) {
 				if (this.current !== e.currentIndex) {
 					this.current = e.currentIndex;
@@ -182,7 +188,7 @@
 .homepage_news_personal {
 	display: block;
 	color: gray;
-	font-size: 4vw;
+	font-size: 1rem;
 }
 .homepage_edit{
 	    width: 15vw;
@@ -201,6 +207,7 @@
 	        border-radius: 5vw;
 	        padding: 4vw;
 	        margin: 5vw;
+			font-size: 0.8rem;
 }
 .homepage_detail>.content{
 	padding: 3vw;
@@ -215,13 +222,33 @@
 	border: 1px solid #eee;
 	margin: 0vw 3vw 8vw;
 }
-.content_my_box>.content_my_name{
+.content_my_name{
+	font-size: 0.9rem;
 	color: #969696;
 	padding: 2vw;
+	overflow: hidden;
+	/* break-all(允许在单词内换行。) */
+	word-break: break-all;
+	/* 超出部分省略号 */
+	text-overflow: ellipsis;
+	/** 对象作为伸缩盒子模型显示 **/
+	display: -webkit-box;
+	/** 设置或检索伸缩盒对象的子元素的排列方式 **/
+	-webkit-box-orient: vertical;
+	/** 显示的行数 **/
+	-webkit-line-clamp: 2;
 }
 .content_my_box>.content_my_price{
 	padding: 2vw;
 	display: flex;
 	justify-content:space-between;
+}
+.mypeople{
+	color: #969696;
+	width: 100%;
+	font-size: 0.7rem;
+	text-align: right;
+	padding: 0.6rem;
+	box-sizing: border-box;
 }
 </style>

@@ -69,6 +69,12 @@
         "navigationBarTitleText": "个人主页"
       }
     },
+	{
+	  "path": "components/uni-my/edit-meas/edit-meas",
+	  "style": {
+	    "navigationBarTitleText": "编辑资料"
+	  }
+	},
     {
       "path": "components/uni-my/my-follow/my-follow",
       "style": {
@@ -108,7 +114,11 @@
         }
       }
     }
-  ],
+      ,{
+            "path" : "components/uni-my/edit-meas/edit-meas",
+            "style" : {}
+        }
+    ],
   "globalStyle": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-app",

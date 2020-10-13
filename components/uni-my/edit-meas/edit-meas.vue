@@ -4,77 +4,42 @@
 		<view class="my_box_top">
 			我的
 			<!-- <navigator url="/components/uni-my/my-setup/Setting" hover-class="navigator-hover"> -->
-			<view @click="setting">
+			<!-- <view @click="setting">
 				<uni-icons class="my_box_top_icons" type="gear" size="23" color="#fff" ></uni-icons>
-			</view>
+			</view> -->
 			<!-- </navigator> -->
 		</view>
 		<view class="my_box_main">
 			<image class="my_box_main_img" src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/img/cat-11.png"></image>
-			<text class="my_box_text">juju的小包子</text>
-			<text class="my_box_text my_box_personal">君子貌少年心，有骨有相，温文尔雅</text>
+			<text class="my_box_text">******</text>
+			<text class="my_box_text my_box_personal">*************</text>
 			<view style="text-align: center; display: flex; justify-content: space-between">
 				<navigator url="/components/uni-my/my-follow/my-follow" hover-class="navigator-hover">
 				<text>
-					<text>3</text>
+					<text>0</text>
 					<text class="homepage_news_personal">关注</text>
 				</text>
 				</navigator>
 				<navigator url="/components/uni-my/homepage-fans/homepage-fans" hover-class="navigator-hover">
 				<text>
-					<text>300</text>
+					<text>0</text>
 					<text class="homepage_news_personal">粉丝</text>
 				</text>
 				</navigator>
 				<text>
-					<text>3</text>
+					<text>0</text>
 					<text class="my_box_personal">点赞</text>
 				</text>
 			</view>
 				
 					<view class="my_box_homepage" @click="onhomepage">
-						个人主页
+						点击登录
 					</view>
 		
 				
 			
 		</view>
-		<view class="my_box_main">
-			<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" style-type="text" active-color="#28D2D1"></uni-segmented-control>
-			<view class="content">
-				<view class="order" v-if="current === 0">
-					<view class="order1">
-						<text>购买订单</text>
-						<navigator url="/components/uni-my/my-sellorder/my-sellorder" hover-class="navigator-hover">
-							<text class="order-ri">查看全部></text>
-						</navigator>
-						
-					</view>
-				</view>
-				<view class="order" v-if="current === 1">
-					<view class="order1">
-						<text>购买订单</text>
-						<navigator url="/components/uni-my/my-buyorder/my-buyorder" hover-class="navigator-hover">
-							<text class="order-ri">查看全部></text>
-						</navigator>
-					</view>
-					<view class="orderbuy">
-						<view class="">
-							<image src='../../../static/myimg/signing.png' style="width: 30px; height: 30px;" />
-							<text>订单签收</text>
-						</view>
-						<view class="">
-							<image src='../../../static/myimg/sign.png' style="width: 30px; height: 30px;" />
-							<text>已签收</text>
-						</view>
-						<view class="">
-							<image src='../../../static/myimg/service.png' style="width: 30px; height: 30px;" />
-							<text>申请/售后</text>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
+		
 	</view>
 </template>
 
