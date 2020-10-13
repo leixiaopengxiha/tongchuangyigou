@@ -10,20 +10,20 @@
 			<!-- </navigator> -->
 		</view>
 		<view class="my_box_main">
-			<image class="my_box_main_img" src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/img/cat-11.png"></image>
-			<text class="my_box_text">juju的小包子</text>
-			<text class="my_box_text my_box_personal">君子貌少年心，有骨有相，温文尔雅</text>
+			<image class="my_box_main_img" :src="admin.photourl"></image>
+			<text class="my_box_text">{{admin.nickname}}</text>
+			<text class="my_box_text my_box_personal">{{admin.signature}}</text>
 			<view style="text-align: center; display: flex; justify-content: space-between">
 				<text>
-					<text>3</text>
+					<text>{{admin.follow}}</text>
 					<text class="my_box_personal">关注</text>
 				</text>
 				<text>
-					<text>300</text>
+					<text>{{admin.fans}}</text>
 					<text class="my_box_personal">粉丝</text>
 				</text>
 				<text>
-					<text>3</text>
+					<text>{{admin.thumbs}}</text>
 					<text class="my_box_personal">点赞</text>
 				</text>
 			</view>
@@ -75,6 +75,7 @@
 </template>
 
 <script>
+	import {mapState} from 'vuex'
 	import uniSegmentedControl from "@/components/uni-segmented-control/uni-segmented-control.vue"
 	export default {
 		name: 'MyHome',
@@ -86,6 +87,9 @@
 				items: ['我卖的', '我买的'],
 				current: 0
 			}
+		},
+		computed:{
+			...mapState(['admin'])
 		},
 		methods: {
 			onClickItem(e) {
