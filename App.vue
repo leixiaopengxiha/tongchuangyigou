@@ -7,6 +7,8 @@ export default {
 			    url: '/pages/release/release'
 			});
 		})
+		this.$store.dispatch('admins')
+		this.$store.dispatch('loginStates')
 	},
 	onShow: function() {
 		console.log('App Show');

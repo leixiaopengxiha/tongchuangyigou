@@ -105,6 +105,13 @@
         "navigationBarTitleText": "发布闲置"
       }
     },
+	{
+	  "path": "pages/login/login",
+	  "style": {
+	    "navigationBarTitleText": "登录",
+		"softinputNavBar": "none"
+	  }
+	},
     {
       "path": "pages/search/search",
       "style": {
