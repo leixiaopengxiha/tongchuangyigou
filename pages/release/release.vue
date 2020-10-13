@@ -17,6 +17,7 @@
 		<view class="back" @click="tuor">
 			<image src="../../static/img/back.png" mode=""></image>
 		</view>
+		<text @click="fenlei">分类</text>
 	</view>
 </template>
 
@@ -39,6 +40,11 @@
 			topic() {
 				uni.navigateTo({
 					url: '/components/uni-release-topic/uni-release-topic'
+				})
+			},
+			fenlei(){
+				uni.navigateTo({
+					url: '/components/uni-home-sort/uni-home-sort'
 				})
 			}
 		}

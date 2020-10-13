@@ -24,6 +24,12 @@
         "navigationBarTitleText": "发布"
       }
     },
+	{
+	  "path": "components/uni-home-sort/uni-home-sort",
+	  "style": {
+	    "navigationBarTitleText": "分类"
+	  }
+	},
     {
       "path": "pages/square/square",
       "style": {
