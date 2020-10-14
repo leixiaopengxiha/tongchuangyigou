@@ -126,7 +126,19 @@
           "softinputNavBar": "none"
         }
       }
-    }
+    },
+	{
+			    "path" : "pages/news/move",
+			    "style" : {
+					"navigationBarTitleText":"消息1"
+				}
+			},
+			{
+			    "path" : "pages/news/square",
+			    "style" : {
+					"navigationBarTitleText":"消息2"
+				}
+			}
       ,{
             "path" : "components/uni-my/edit-meas/edit-meas",
             "style" : {}

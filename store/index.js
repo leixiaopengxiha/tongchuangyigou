@@ -16,13 +16,18 @@ export default new Vuex.Store({
 		},
 		loginStatesa(state, data){
 			state.admin = data.data
+			const admins = uni.getStorageSync('admin');
 			uni.setStorage({
 				key: 'admin',
 				data:data.data
 			});
-			uni.switchTab({
-			    url: '/pages/mys/mys'
-			});
+			if(!admins){
+				uni.switchTab({
+				    url: '/pages/mys/mys'
+				});
+			}
+			
+			
 			
 		}
 	},
