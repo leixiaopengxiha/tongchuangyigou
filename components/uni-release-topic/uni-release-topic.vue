@@ -48,7 +48,10 @@
 					uni.chooseImage({
 						success: (res) => {
 							var tempFilePaths = res.tempFilePaths;
-							console.log(res)
+							if(tempFilePaths){
+								_this.showImg=[]
+							}
+							// console.log(res)
 							for (var i = 0; i < tempFilePaths.length; i++) {
 								uni.saveFile({
 									tempFilePath: tempFilePaths[i],

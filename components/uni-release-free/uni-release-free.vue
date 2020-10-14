@@ -98,9 +98,6 @@
 				this.show = !this.show;
 			},
 			back(content) {
-				if (this.label == content) {
-
-				}
 				this.show = !this.show;
 				this.label = content;
 			},
@@ -110,7 +107,10 @@
 					uni.chooseImage({
 						success: (res) => {
 							var tempFilePaths = res.tempFilePaths;
-							console.log(res)
+							// console.log(res)
+							if(tempFilePaths){
+								_this.showImg=[]
+							}
 							for (var i = 0; i < tempFilePaths.length; i++) {
 								uni.saveFile({
 									tempFilePath: tempFilePaths[i],
@@ -132,17 +132,17 @@
 
 <style scoped>
 	.back {
-		height: 6vh;
+		height: 3vh;
 		background: #007AFF;
-		width: 100vw;
+		width: 10vw;
 		position: fixed;
-		top: 0vh;
+		z-index: 100;
 		left: 0;
 		z-index: 1000;
 		text-align: center;
 		font-size: 14px;
 		color: #EEEEEE;
-		line-height: 6vh;
+		line-height: 3vh;
 	}
 
 	.container {
