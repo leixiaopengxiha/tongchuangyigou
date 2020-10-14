@@ -104,6 +104,7 @@
 									key: 'token',
 									data:res.data.data.token
 								});
+								console.log(this.$store.dispatch)
 								this.$store.dispatch('loginStates')
 							}
 							

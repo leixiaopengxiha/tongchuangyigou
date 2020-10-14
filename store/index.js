@@ -34,7 +34,6 @@ export default new Vuex.Store({
 		loginStates({
 			commit
 		}) {
-			console.log('ss')
 			const token = uni.getStorageSync('token');
 				uni.request({
 					url: `${apiUrl}/getadmin`,
@@ -43,7 +42,6 @@ export default new Vuex.Store({
 						token:token
 					},
 					success: res => {
-						console.log(res)
 						if(res.data.code==200){
 							 commit('loginStatesa', res.data)
 							
