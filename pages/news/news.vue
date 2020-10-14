@@ -108,7 +108,7 @@
  }
 </script>
 
-<style>
+<style scoped>
 .newsye{
  position: relative;
 }
@@ -135,7 +135,6 @@
  width: 20%;
  height: 90%;
  margin: 2% 0 2% 0;
- /* padding-top: 10px; */
  float: left;
 }
 .item1 p{
@@ -159,7 +158,6 @@
  position: absolute;
  top: 160px;
  overflow: hidden;
- /* border-top: 2px solid red; */
 }
 .Chatlist{
  width: 100%;
@@ -186,7 +184,6 @@
  float: left;
 }
 .textname{
- /* width: 80px; */
  float: left;
  margin:15px 10px 0px 0px;
 }
