@@ -30,13 +30,6 @@
 					<label>
 						<input placeholder="请确认您的密码" type="password" v-model="reFlag.reendpass" />
 					</label>
-					<!-- 提示弹出层 -->
-					<!-- <uni-popup ref="popup" type='message' >
-						{{messages}}
-					</uni-popup> -->
-					
-					
-					
 				</view>
 				<view class="zhuce" @click="regaster">
 					注册
@@ -76,7 +69,6 @@
 	
 		methods: {
 			messa(succe,messages){
-				
 				this.succe=succe;
 				this.messages=messages;
 				this.$refs.popup.open()

@@ -50,6 +50,7 @@
 </template>
 
 <script>
+	import {apiUrl} from '@/aip/index.js'
 	import tabControl from "@/components/tabControl-tag/tabControl-tag.vue"
 	export default {
 		components: {
@@ -126,8 +127,13 @@
 						nickname:'你得支凌起来啊',
 						photourl:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
 					}
-				]
+				],
+				mockData:[],
+				mockDataList:[]
 			}
+		},
+		mounted(){
+			// this.getHouqu()
 		},
 		methods: {
 			// 选项卡02点击事件
@@ -138,6 +144,46 @@
 			scollSwiper(e) {
 				this.contentIndex = e.target.current;
 			},
+			
+			onFind(){
+				// if(this.menu=='推荐'||this.menu='最新'){
+				// 	this.mockDataList = this.mockData
+				// }else if(this.menu=='推荐'){
+				// 	let arr = []
+				// 	for(let i=0;i<this.mockData.length;i++){
+				// 		if(this.mockData[i].label==this.menu){
+				// 			arr.push(this.mockData[i])
+				// 		}
+				// 	}
+				// 	this.mockDataList = arr
+				// 	arr = []
+				// }else{
+				// 	let arr = []
+				// 	for(let i=0;i<this.mockData.length;i++){
+				// 		if(this.mockData[i]['sort']==this.menu){
+				// 			arr.push(this.mockData[i])
+				// 		}
+				// 	}
+				// 	this.mockDataList = arr
+				// 	arr = []
+				// }
+			
+			},
+			getHouqu(){
+				uni.request({
+					url: `${apiUrl}/squaregetpanning`,
+					method:"POST",
+					success: res => {
+						if(res.data.code==200){
+							this.mockData= res.data.data
+							this.onFind()
+						}
+					},
+					fail: (err) => {
+						console.log(err)
+					}
+				})
+			}
 		}
 	}
 </script>

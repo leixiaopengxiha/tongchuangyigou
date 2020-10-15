@@ -1,11 +1,8 @@
 <template>
 	<view class="container">
 		<view class="nav-boxs">
-			<view class="selector">
-				{{menu}}
-			</view>
 			<view class="nav">
-				<view class="box" v-for="(item,index) in navLeft" :key='index' @click="addSelect(item.title)">
+				<view class="box" :class="{'selector': item.title==menu}"  v-for="(item,index) in navLeft" :key='index' @click="addSelect(item.title)">
 					{{item.name}}
 				</view>
 			</view>
@@ -15,21 +12,24 @@
 				{{menu}}
 			</view>
 			<view class="mock">
-				<view class="flex" v-for='(item,index) in mockData' :key='index'>
-					<image :src="item.shopUrl" mode=""></image>
-					<text class="shop">{{item.shop}}</text>
+				<view v-if='mockDataList.length==0'>
+					暂无数据
+				</view>
+				<view v-else class="flex" v-for='(item,index) in mockDataList' :key='index'>
+					<image :src="item.imgurl[0].url" mode=""></image>
+					<text class="shop">{{item.title}}</text>
 					<view class="borderBox">
 						<text style="font-size: 12px;color: #FF779D;">￥</text>
 						<text style="font-size: 16px;color: #FF779D;">{{item.price}}</text>
-						<text style="float: right;font-size: 12px;margin-top: 0.5vh;">已有{{item.collect}}人收藏</text>
+						<text style="float: right;font-size: 12px;margin-top: 0.5vh;">已有{{item.follow}}人收藏</text>
 					</view>
 					<view class="user">
-						<image :src="item.userUrl" class="userIcon" mode=""></image>
+						<image :src="item.photourl" class="userIcon" mode=""></image>
 						<view class="userInfo">
-							<text class="userName">{{item.userName}}</text>
+							<text class="userName">{{item.nickname}}</text>
 							<view class="fansBox">
 								<text class="fans">粉丝:{{item.fans}}</text>
-								<text class="collect">关注:{{item.follower}}</text>
+								<text class="collect">关注:{{item.follow}}</text>
 							</view>
 						</view>
 					</view>
@@ -40,19 +40,24 @@
 </template>
 
 <script>
+	import {apiUrl} from '@/aip/index.js'
 	export default {
-		name: 'sort',
+
 		data() {
 			return {
-				menu: '推荐',
+				menu: '全部',
 				navLeft: [{
+					num: 0,
+					name: '全部',
+					title: '全部',
+				},{
 					num: 1,
 					name: '热门推荐',
 					title: '推荐',
 				}, {
 					num: 2,
-					name: '手机数码',
-					title: '手机数码',
+					name: '数码产品',
+					title: '数码产品',
 				}, {
 					num: 3,
 					name: '家用电器',
@@ -77,6 +82,11 @@
 					num: 8,
 					name: '美妆',
 					title: '美妆',
+				},{
+					num: 14,
+					name: '图书文具',
+					title: '图书文具',
+					
 				}, {
 					num: 9,
 					name: '家具/饰品',
@@ -98,62 +108,63 @@
 					name: '健身器材',
 					title: '健身器材',
 				}],
-				mockData: [{
-					id: 1,
-					shopUrl: '../../static/img/chanpin2@2x.png',
-					shop: '阿狸布偶一对',
-					price: 23,
-					collect: 18,
-					userUrl: '../../static/img/icon.jpg',
-					userName: '饕餮',
-					fans: 123,
-					follower: 18,
-				},  {
-					id: 2,
-					shopUrl: '../../static/img/chanpin2@2x.png',
-					shop: '阿狸布偶一对',
-					price: 23,
-					collect: 18,
-					userUrl: '../../static/img/icon.jpg',
-					userName: '饕餮',
-					fans: 123,
-					follower: 18,
-				} , {
-					id: 2,
-					shopUrl: '../../static/img/chanpin2@2x.png',
-					shop: '阿狸布偶一对',
-					price: 23,
-					collect: 18,
-					userUrl: '../../static/img/icon.jpg',
-					userName: '饕餮',
-					fans: 123,
-					follower: 18,
-				} , {
-					id: 2,
-					shopUrl: '../../static/img/chanpin2@2x.png',
-					shop: '阿狸布偶一对',
-					price: 23,
-					collect: 18,
-					userUrl: '../../static/img/icon.jpg',
-					userName: '饕餮',
-					fans: 123,
-					follower: 18,
-				} ,{
-					id: 3,
-					shopUrl: '../../static/img/chanpin2@2x.png',
-					shop: '阿狸布偶一对',
-					price: 23,
-					collect: 18,
-					userUrl: '../../static/img/icon.jpg',
-					userName: '饕餮',
-					fans: 123,
-					follower: 18,
-				}]
+				mockData: [],
+				mockDataList:[]
 			}
 		},
+		 onLoad: function (option) {
+				this.menu = option.id
+				
+		    },
+		mounted(){
+			this.getHouqu();
+			
+		},
+		
 		methods: {
 			addSelect(content) {
 				this.menu = content;
+				this.onFind()
+			},
+		
+			onFind(){
+				if(this.menu=='全部'){
+					this.mockDataList = this.mockData
+				}else if(this.menu=='推荐'){
+					let arr = []
+					for(let i=0;i<this.mockData.length;i++){
+						if(this.mockData[i].label==this.menu){
+							arr.push(this.mockData[i])
+						}
+					}
+					this.mockDataList = arr
+					arr = []
+				}else{
+					let arr = []
+					for(let i=0;i<this.mockData.length;i++){
+						if(this.mockData[i]['sort']==this.menu){
+							arr.push(this.mockData[i])
+						}
+					}
+					this.mockDataList = arr
+					arr = []
+				}
+			
+			},
+			getHouqu(){
+				uni.request({
+					url: `${apiUrl}/squaregetpanning`,
+					method:"POST",
+					success: res => {
+						if(res.data.code==200){
+							this.mockData= res.data.data
+							this.onFind()
+						}
+					},
+					fail: (err) => {
+						console.log(err)
+					}
+				})
 			}
 		},
 	}
@@ -219,7 +230,7 @@
 		background: #28D2D1;
 		text-align: center;
 		line-height: 3vh;
-		color: #EEEEEE;
+		color: #FFFFFF !important;
 		font-size: 14px;
 	}
 

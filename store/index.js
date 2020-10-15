@@ -16,13 +16,18 @@ export default new Vuex.Store({
 		},
 		loginStatesa(state, data){
 			state.admin = data.data
+			const admins = uni.getStorageSync('admin');
 			uni.setStorage({
 				key: 'admin',
 				data:data.data
 			});
-			uni.switchTab({
-			    url: '/pages/mys/mys'
-			});
+			if(!admins){
+				uni.switchTab({
+				    url: '/pages/mys/mys'
+				});
+			}
+			
+			
 			
 		}
 	},
@@ -34,7 +39,6 @@ export default new Vuex.Store({
 		loginStates({
 			commit
 		}) {
-			console.log('ss')
 			const token = uni.getStorageSync('token');
 				uni.request({
 					url: `${apiUrl}/getadmin`,
@@ -43,7 +47,6 @@ export default new Vuex.Store({
 						token:token
 					},
 					success: res => {
-						console.log(res)
 						if(res.data.code==200){
 							 commit('loginStatesa', res.data)
 							

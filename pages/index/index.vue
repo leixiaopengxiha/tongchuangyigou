@@ -17,11 +17,6 @@
          },
          methods: {
              loadExecution: function(){
-                 /**
-                  * 获取本地存储中launchFlag的值
-                  * 若存在，说明不是首次启动，直接进入首页；
-                  * 若不存在，说明是首次启动，进入引导页；
-                  */
                  try {
                      // 获取本地存储中launchFlag标识
                      const value = uni.getStorageSync('launchFlag');
