@@ -3,28 +3,28 @@
 		<swiper class="swiper" :circular='true' :autoplay='true' >
 		    <swiper-item v-for="item in imgUrl" :key='item.id'>
 				<view class="swiper-item">
-					<image :src='item.url'></image>
+					<image :src='item.imgurl'></image>
 				</view>
 		    </swiper-item>
 		</swiper>
 		<view class="ification">
-			<view class="ifibox" @click="()=>onIfication('数码家电')"> 
+			<view class="ifibox" @click="onIfication('数码产品')"> 
 				<image src='@/static/homeimg/shuma@2x.png'></image>
-				数码家电
+				数码产品
 			</view>
-			<view class="ifibox" @click="()=>onIfication('图书文具')">
+			<view class="ifibox" @click="onIfication('图书文具')">
 				<image src='@/static/homeimg/tushu@2x.png'></image>
 				图书文具
 			</view>
-			<view class="ifibox" @click="()=>onIfication('服饰鞋包')">
+			<view class="ifibox" @click="onIfication('女装')">
 				<image src='@/static/homeimg/yifu3@2x.png'></image>
 				服饰鞋包
 			</view>
-			<view class="ifibox" @click="()=>onIfication('美妆闲置')">
+			<view class="ifibox" @click="onIfication('美妆')">
 				<image src='@/static/homeimg/gongju.png'></image>
 				美妆闲置
 			</view>
-			<view class="ifibox" @click="()=>onIfication('全部分类')">
+			<view class="ifibox" @click="onIfication('全部')">
 				<image src='@/static/homeimg/quanbu.png'></image>
 				全部分类
 			</view>
@@ -33,25 +33,43 @@
 </template>
 
 <script>
+	import {apiUrl} from '@/aip/index.js'
 	export default {
 		name:'HomeTop',
 		data() {
 			return {
-				imgUrl:[
-					{
-						id:1,
-						url:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601985094125&di=9a95c249ccbd5e59e5baf6c4eeff8c8b&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F14%2F75%2F01300000164186121366756803686.jpg'
-					},
-					{
-						id:2,
-						url:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1830914723,3154965800&fm=26&gp=0.jpg'
-					}
-				]
+				imgUrl:[]
 			}
+		},
+		mounted(){
+			this.onSwiper()
 		},
 		methods: {
 			onIfication(data){
 				console.log(data)
+				uni.navigateTo({
+				    url:`/components/uni-home-sort/uni-home-sort?id=${data}`
+				});
+				
+				// console.log(data)
+			},
+			onSwiper(){
+				let _this = this
+				uni.request({
+					url: `${apiUrl}/swiper`,
+					method:"POST",
+					data: {},
+					success: res => {
+						
+					 if(res.data.code==200){
+							_this.imgUrl = res.data.data
+						}
+						
+					},
+					fail: (err) => {
+						console.log(err)
+					}
+				})
 			}
 		}
 	}

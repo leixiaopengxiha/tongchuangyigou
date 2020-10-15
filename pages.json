@@ -24,6 +24,12 @@
         "navigationBarTitleText": "发布"
       }
     },
+	{
+	  "path": "components/uni-home-sort/uni-home-sort",
+	  "style": {
+	    "navigationBarTitleText": "分类"
+	  }
+	},
     {
       "path": "pages/square/square",
       "style": {
@@ -120,7 +126,20 @@
           "softinputNavBar": "none"
         }
       }
-    }
+    },
+	{
+			    "path" : "pages/news/move",
+			    "style" : {
+					"navigationBarTitleText":"消息1"
+				}
+			},
+			{
+			    "path" : "pages/news/square",
+			    "style" : {
+					"navigationBarTitleText":"消息2"
+				}
+			}
+      
     ],
   "globalStyle": {
     "navigationBarTextStyle": "white",

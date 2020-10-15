@@ -17,16 +17,18 @@
 		<view class="back" @click="tuor">
 			<image src="../../static/img/back.png" mode=""></image>
 		</view>
+		<!-- <text @click="fenlei">分类</text> -->
 	</view>
 </template>
 
 <script>
+	import {apiUrl} from '../../aip/index.js'
 	export default {
 		data() {
 			return {}
 		},
-		methods: {
-			tuor() {
+		methods: {	
+			tuor() {                                                                                                                                                                                                                                                                 
 				uni.switchTab({
 					url: '/pages/homes/homes'
 				});
@@ -40,7 +42,8 @@
 				uni.navigateTo({
 					url: '/components/uni-release-topic/uni-release-topic'
 				})
-			}
+			},
+		
 		}
 	}
 </script>
