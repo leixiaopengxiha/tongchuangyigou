@@ -8,9 +8,9 @@
 		    </swiper-item>
 		</swiper>
 		<view class="ification">
-			<view class="ifibox" @click="onIfication('数码产品')"> 
+			<view class="ifibox" @click="onIfication('手机数码')"> 
 				<image src='@/static/homeimg/shuma@2x.png'></image>
-				数码产品
+				手机数码
 			</view>
 			<view class="ifibox" @click="onIfication('图书文具')">
 				<image src='@/static/homeimg/tushu@2x.png'></image>

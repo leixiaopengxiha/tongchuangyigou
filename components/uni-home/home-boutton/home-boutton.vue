@@ -13,17 +13,18 @@
 					<swiper-item v-for="(twoNav, index) in twoNavs" :key="index">
 						<scroll-view scroll-y="true" style="height: 100%;">
 							<view class="scrlist-box">
-								<view class="content-boxs" v-for="item in productlist" :key='item.id'>
-									<image class="img-boxs" :src='item.url'></image>
+								<view class="content-boxs" v-for="item in mockDataList" :key='item._id'>
+									<image class="img-boxs" :src='item.imgurl[0].url'></image>
 									<view class="text-title">
 										{{item.title}}
 									</view>
 									<view class="price-box">
 										<view class="price">
+											
 											￥{{item.price}}
 										</view>
 										<view class="shoucang">
-											已有{{item.shoucang}}人收藏
+											已有{{item.fans.length}}人收藏
 										</view>
 									</view>
 									<view class="photourl-box">
@@ -34,8 +35,7 @@
 											<view class="nickname">
 												{{item.nickname}}
 											</view>
-
-											<view class="fensi">粉丝:{{item.fensi}} 关注:{{item.guanzhu}}</view>
+											<view class="fensi">粉丝:{{item.fans.length}} 关注:{{item.follow.length}}</view>
 										</view>
 									</view>
 								</view>
@@ -59,124 +59,87 @@
 		data() {
 			return {
 				contentIndex: 0,
-				twoNavs: ['推荐', '最新', '数码产品', '图书文具', '服饰鞋包', '美妆闲置', '体育用品', '服饰鞋包', '美妆闲置'],
-				productlist:[
-					{
-						id:1,
-						title:'卡通金属文具',
-						url:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-						price: 23,
-						shoucang:2,
-						fensi:98,
-						guanzhu:26,
-						nickname:'你得支凌起来啊',
-						photourl:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-					},
-					{
-						id:2,
-						title:'卡通金属文具',
-						url:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-						price: 23,
-						shoucang:2,
-						fensi:98,
-						guanzhu:26,
-						nickname:'你得支凌起来啊',
-						photourl:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-					},
-					{
-						id:3,
-						title:'卡通金属文具',
-						url:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-						price: 23,
-						shoucang:2,
-						fensi:98,
-						guanzhu:26,
-						nickname:'你得支凌起来啊',
-						photourl:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-					},
-					{
-						id:4,
-						title:'卡通金属文具',
-						url:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-						price: 23,
-						shoucang:3,
-						fensi:98,
-						guanzhu:26,
-						nickname:'你得支凌起来啊',
-						photourl:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-					},
-					{
-						id:5,
-						title:'卡通金属文具',
-						url:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-						price: 23,
-						shoucang:2,
-						fensi:98,
-						guanzhu:26,
-						nickname:'你得支凌起来啊',
-						photourl:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-					},
-					{
-						id:6,
-						title:'卡通金属文具',
-						url:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-						price: 23,
-						shoucang:2,
-						fensi:98,
-						guanzhu:26,
-						nickname:'你得支凌起来啊',
-						photourl:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602060770161&di=8050d46aeca4bcd2acf1f26fe42449e7&imgtype=0&src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829124825_CMhuS.thumb.400_0.jpeg",
-					}
-				],
+				datal:{},
+				page:0,
+				menu:'推荐',
+				twoNavs: ['推荐', '最新', '手机数码', '家用电器','女装', '生活百货','运动户外','乐器','美妆','家具/饰品'],
 				mockData:[],
+				
 				mockDataList:[]
 			}
 		},
 		mounted(){
-			// this.getHouqu()
+			this.onFind()
 		},
 		methods: {
 			// 选项卡02点击事件
 			onClickConent(val) {
 				this.contentIndex = val.currentIndex;
+				this.menu = this.twoNavs[val]
+				this.page=0
+				this.onFind();
 			},
 			// 选项卡02点击事件
 			scollSwiper(e) {
 				this.contentIndex = e.target.current;
+				this.menu = this.twoNavs[e.target.current]
+				this.page=0
+				this.onFind();
 			},
-			
+			// suiji() {
+			// 	let count = this.mockData.length/2;
+			// 	let original = new Array(); //原始数组 //给原始数组original赋值
+			// 	let arr =[]
+			// 	for (var i = 0; i < count; i++) {
+			// 		original[i] = i + 1;
+			// 	}
+			// 	original.sort(function() {
+			// 		return 0.5 - Math.random();
+			// 	});
+			// 	for (var i = 0; i < count; i++) {
+			// 		arr.push(this.mockData[i])
+			// 	}
+			// 	this.mockDataList = arr
+			// },
 			onFind(){
-				// if(this.menu=='推荐'||this.menu='最新'){
-				// 	this.mockDataList = this.mockData
-				// }else if(this.menu=='推荐'){
-				// 	let arr = []
-				// 	for(let i=0;i<this.mockData.length;i++){
-				// 		if(this.mockData[i].label==this.menu){
-				// 			arr.push(this.mockData[i])
-				// 		}
-				// 	}
-				// 	this.mockDataList = arr
-				// 	arr = []
-				// }else{
-				// 	let arr = []
-				// 	for(let i=0;i<this.mockData.length;i++){
-				// 		if(this.mockData[i]['sort']==this.menu){
-				// 			arr.push(this.mockData[i])
-				// 		}
-				// 	}
-				// 	this.mockDataList = arr
-				// 	arr = []
-				// }
+				
+				if(!this.menu) return
+				// console.log(this.menu)
+				if (this.menu == '推荐') {
+					this.datal={
+						page:this.page
+					}
+					this.getHouqu();
+				} else if (this.menu == '最新') {
+					this.datal={
+						page:this.page
+					}
+					this.getHouqu();
+				} else {
+					// let arr = [];
+					// for (let i = 0; i < this.mockData.length; i++) {
+					// 	if (this.mockData[i]['sort'] == this.menu) {
+					// 		arr.push(this.mockData[i]);
+					// 	}
+					// }
+					// this.mockDataList = arr;
+					// arr = [];
+					this.datal={
+						label:this.menu,
+						page:this.page,
+					};
+					this.getHouqu()
+				}
 			
 			},
 			getHouqu(){
 				uni.request({
 					url: `${apiUrl}/squaregetpanning`,
 					method:"POST",
+					data:this.datal,
 					success: res => {
 						if(res.data.code==200){
-							this.mockData= res.data.data
-							this.onFind()
+							this.mockDataList= res.data.data
 						}
 					},
 					fail: (err) => {
@@ -254,12 +217,16 @@
 }
 .photourl image{
 	width: 2.5rem;
+	text-align: center;
 	height: 2.5rem;
+	display: inline-block;
 	border-radius: 50%;
-	padding-right: 0.3rem;
+	margin-right: 0.5rem;
+
 }
 .nickname{
-	width: calc(45vw - 3rem);
+
+	width: calc(45vw - 4rem);
 	color: #333333;
 	overflow:hidden; 
 	text-overflow:ellipsis;

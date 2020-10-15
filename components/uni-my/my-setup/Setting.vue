@@ -61,8 +61,7 @@
 				// 清除缓存
 				uni.clearStorage('token');
 				uni.clearStorage('admin');
-			
-				// this.$store.dispatch('admins')
+				this.$store.dispatch('tologin');
 				// this.$store.dispatch('loginStates')
 				
 				uni.redirectTo({
