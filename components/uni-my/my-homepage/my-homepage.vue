@@ -1,27 +1,28 @@
 <template>
 	<view class="my-homepage">
 		<view class="homepage_bg">
-			<image src='https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/img/cat-11.png'></image>
+			<!-- <image src='https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/img/cat-11.png'></image> -->
+			<image :src="admin.photourl"></image>
 		</view>
 		<view class="homepage_news">
-			<image class="homepage_img" src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/img/cat-11.png"></image>
+			<image class="homepage_img" :src="admin.photourl"></image>
 			<view class="homepage_news_del">
-				<text class="home_name">热苏打.</text>
+				<text class="home_name">{{admin.nickname}}</text>
 				<view  style="display: flex; justify-content: space-between;margin-top: 1vh;">
 					<navigator url="/components/uni-my/my-follow/my-follow" hover-class="navigator-hover">
 					<text>
-						<text>3</text>
+						<text>{{admin.follow}}</text>
 						<text class="homepage_news_personal">关注</text>
 					</text>
 					</navigator>
 					<navigator url="/components/uni-my/homepage-fans/homepage-fans" hover-class="navigator-hover">
 					<text>
-						<text>300</text>
+						<text>{{admin.fans}}</text>
 						<text class="homepage_news_personal">粉丝</text>
 					</text>
 					</navigator>
 					<text>
-						<text>3</text>
+						<text>{{admin.thumbs}}</text>
 						<text class="homepage_news_personal">点赞</text>
 					</text>
 				</view>
@@ -31,7 +32,7 @@
 			</view>
 		</view>
 		<view class="homepage_inp">
-			<text>一个人也要热爱生活，要坚强要努力！</text>
+			<text>{{admin.signature}}</text>
 		</view>
 		<view class="homepage_detail" style="border-top: 1px solid #eee;">
 				<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" style-type="text" active-color="#28D2D1" style="border-bottom: 1px solid #eee;"></uni-segmented-control>
@@ -64,12 +65,11 @@
 </template>
 
 <script>
-	import uniSegmentedControl from "@/components/uni-segmented-control/uni-segmented-control.vue";
+	import {mapState} from "vuex";
 	import HomepageAssess from '@/components/uni-my/homepage-assess/homepage-assess.vue'
 	export default {
 		name:'MyHomepage',
 		components: {
-			uniSegmentedControl,
 			HomepageAssess
 		},
 		data() {
@@ -129,7 +129,11 @@
 				]
 			}
 		},
+		computed: {
+			...mapState(["admin"])
+		},
 		methods: {
+			// 跳转到编辑资料
 			onedit(){
 				uni.navigateTo({
 					url:'/components/uni-my/edit-meas/edit-meas'

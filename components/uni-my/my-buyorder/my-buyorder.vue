@@ -10,24 +10,24 @@
 							<view class="lch_content_shop">
 								<uni-icons type="shop" size="15"></uni-icons>
 								<text>
-									{{item.shopName}}
+									{{item.nickname}}
 								</text>
 								<uni-icons type="arrowright" size="15"></uni-icons>
-								<text v-if="item.condition===1" style="float: right; color: #28D2D1;">未交易</text>
-								<text v-if="item.condition===2" style="float: right; color: #28D2D1;">交易完成</text>
-								<text v-if="item.condition===3" style="float: right; color: #28D2D1;">未评价</text>
-								<text v-if="item.condition===4" style="float: right; color: #28D2D1;">已交易/未交易</text>
+								
+								<text v-if="item.business===1" style="float: right; color: #28D2D1;">已发货</text>
+								<text v-if="item.business===2" style="float: right; color: #28D2D1;">未评价</text>
+								<text v-if="item.business===3" style="float: right; color: #28D2D1;">交易完成</text>
 							</view>
 						</view>
 						<view class="lch_content_shopmain">
-							<image :src='item.image'></image>
-							<text style="margin-right: 15px;">{{item.name}}</text>
+							<image :src='item.imgurl[0]'></image>
+							<text style="margin-right: 15px;">{{item.explain}}</text>
 							<text>{{item.money}}</text>
 						</view>
-						<view v-if="item.condition===1" class="lch_content_Confirm">确认收货</view>
-						<view v-if="item.condition===2" class="lch_content_Confirm">已签收</view>
-						<view v-if="item.condition===3" class="lch_content_Confirm">订单评价</view>
-						<view v-if="item.condition===4" class="lch_content_Confirm_text">
+						
+						<view v-if="item.business===1" class="lch_content_Confirm">已签收</view>
+						<view v-if="item.business===2" class="lch_content_Confirm">订单评价</view>
+						<view v-if="item.business===3" class="lch_content_Confirm_text">
 							<view class="">联系客服</view>
 							<view class="">查看详情</view>
 						</view>
@@ -39,53 +39,83 @@
 </template>
 
 <script>
+	import {apiUrl} from '@/aip/index.js'
+	import {mapState} from 'vuex'
 	export default {
 		data() {
 			return {
 				tab: {
-					items: ['全部', '已签收', '订单评价', '申请售后'],
+					items: ['全部', '未签收', '订单评价', '申请售后'],
 					current: 0
 				},
-				whole: [{
-					id: 1,
-					shopName: '港仔文艺男',
-					name: '港仔文艺男港风卫衣连帽韩版学生潮流宽松 ins秋季卫衣',
-					condition: 1, // 1-未交易 2-已签收 3-未评价 4-申请售后
-					image: '/static/myimg/yifu.jpg',
-					money: '￥68.00'
-					
-				}, {
-					id: 2,
-					shopName: '港仔文艺男',
-					name: '卫衣春秋薄款2020新款韩版撞色百搭ins潮',
-					condition: 2,
-					image: '/static/myimg/yifu.jpg',
-					money: '￥78.00'
-					
-				}, {
-					id: 3,
-					shopName: '港仔文艺男',
-					name: '港仔文艺男款2020新款韩',
-					condition: 3,
-					image: '/static/myimg/yifu.jpg',
-					money: '￥88.00'
-					
-				}, {
-					id: 3,
-					shopName: '港仔文艺男',
-					name: '港仔文艺男款2020新款韩',
-					condition: 4,
-					image: '/static/myimg/yifu.jpg',
-					money: '￥188.00'
-					
-				}]
+				whole: []
 			}
 		},
+		computed:{
+			...mapState(['admin'])
+		},
+		mounted() {
+			this.onOrder()
+		},
 		methods: {
+			// 订单请求
+			onOrder(){
+				uni.request({
+					url:`${apiUrl}/getallbuy`,
+					method:"POST",
+					data:{username:this.admin.username,
+					transaction:1},
+					success:({data})=>{
+						// console.log(data.data)
+						this.whole = data.data
+					}
+				})
+			},	
 			// 选项卡事件
 			onClickItem(e) {
 				if (this.tab.current !== e.currentIndex) {
 					this.tab.current = e.currentIndex;
+				}
+				// console.log(this.tab.current)
+				// 未签收
+				if(this.tab.current==1){
+						uni.request({
+							url:`${apiUrl}/getallbuy`,
+							method:"POST",
+							data:{username:this.admin.username,
+							transaction:1,
+							business:1},
+							success:({data})=>{
+								console.log(data.data)
+								this.whole = data.data
+							}
+						})
+				}else if(this.tab.current==2){
+					// 订单评价
+						uni.request({
+							url:`${apiUrl}/getallbuy`,
+							method:"POST",
+							data:{username:this.admin.username,
+							transaction:1,
+							business:2},
+							success:({data})=>{
+								console.log(data.data)
+								this.whole = data.data
+							}
+						})
+				}else if(this.tab.current==3){
+					// 申请售后
+						uni.request({
+							url:`${apiUrl}/getallbuy`,
+							method:"POST",
+							data:{username:this.admin.username,
+							transaction:1,
+							business:3},
+							success:({data})=>{
+								console.log(data.data)
+								this.whole = data.data
+							}
+						})
 				}
 			}
 		}

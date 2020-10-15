@@ -5,39 +5,55 @@
 				<view class="lch_content_shop">
 					<uni-icons type="shop" size="15"></uni-icons>
 					<text>
-						{{item.shopName}}
+						{{item.nickname}}
 					</text>
 					<uni-icons type="arrowright" size="15"></uni-icons>
-					<text v-if="item.condition===1" style="float: right; color: #28D2D1;">未交易</text>
-					<text v-if="item.condition===2" style="float: right; color: #28D2D1;">交易完成</text>
-					<text v-if="item.condition===3" style="float: right; color: #28D2D1;">未评价</text>
-					<text v-if="item.condition===4" style="float: right; color: #28D2D1;">已交易/未交易</text>
+					
+					<text v-if="item.business===1" style="float: right; color: #28D2D1;">未发货</text>
+					<text v-if="item.business===2" style="float: right; color: #28D2D1;">未评价</text>
+					<text v-if="item.business===3" style="float: right; color: #28D2D1;">已交易</text>
 				</view>
 			</view>
 			<view class="lch_content_shopmain">
-				<image :src='item.image'></image>
-				<text style="margin-right: 15px;">{{item.name}}</text>
+				<image :src='item.imgurl[0]'></image>
+				<text style="margin-right: 15px;">{{item.explain}}</text>
 				<text>{{item.money}}</text>
 			</view>
-			<view v-if="item.condition===1" class="lch_content_Confirm">未卖出</view>
-			<view v-if="item.condition===2" class="lch_content_Confirm">已卖出</view>
+			<view v-if="item.business===1" class="lch_content_Confirm">未卖出</view>
+			<view v-if="item.business===2||item.business===3" class="lch_content_Confirm">已卖出</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {apiUrl} from '@/aip/index.js'
+	import {mapState} from 'vuex'
 	export default {
 		data() {
 			return {
-				whole: [{
-					id: 1,
-					shopName: '飘雪victoria',
-					name: '港仔文艺男港风卫衣连帽韩版学生潮流宽松 ins秋季卫衣',
-					condition: 2, // 1-未卖出 2-已卖出
-					image: '/static/myimg/yifu.jpg',
-					money: '￥68.00'
-				}]
+				whole: []
 			};
+		},
+		computed:{
+			...mapState(['admin'])
+		},
+		mounted() {
+			this.onOrder()
+		},
+		methods:{
+			// 订单请求
+			onOrder(){
+				uni.request({
+					url:`${apiUrl}/getallbuy`,
+					method:"POST",
+					data:{username:this.admin.username,
+					transaction:2},
+					success:({data})=>{
+						// console.log(data.data)
+						this.whole = data.data
+					}
+				})
+			}
 		}
 	}
 </script>

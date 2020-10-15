@@ -16,26 +16,30 @@
 </template>
 
 <script>
+	
+	import {apiUrl} from '@/aip/index.js'
+	import {mapState} from 'vuex'
 	export default {
 		data() {
 			return {
 				people: []
 			}
 		},
+		computed:{
+			...mapState(['admin'])
+		},
 		mounted() {
 			this.qingqiu()
 		},
 		methods: {
-			// onchange(obj) {
-			// 	obj.follow = !obj.follow
-			// },
+			// 粉丝请求接口
 			qingqiu(){
 				uni.request({
-					url:"http://132.232.89.22:8848/allfollow",
+					url:`${apiUrl}/allfollow`,
 					method:"POST",
-					data:{"username":"18035852945"},
+					data:{username:this.admin.username},
 					success:({data})=>{
-						console.log(data.data.fans)
+						// console.log(data.data.fans)
 						this.people = data.data.fans
 					}
 				})

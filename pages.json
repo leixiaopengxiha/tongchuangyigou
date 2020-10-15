@@ -72,7 +72,7 @@
 	{
 	  "path": "components/uni-my/edit-meas/edit-meas",
 	  "style": {
-	    "navigationBarTitleText": "编辑资料"
+	    "navigationBarTitleText": "个人信息"
 	  }
 	},
     {
@@ -121,10 +121,6 @@
         }
       }
     }
-      ,{
-            "path" : "components/uni-my/edit-meas/edit-meas",
-            "style" : {}
-        }
     ],
   "globalStyle": {
     "navigationBarTextStyle": "white",

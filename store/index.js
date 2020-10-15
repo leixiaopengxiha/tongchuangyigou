@@ -9,6 +9,7 @@ export default new Vuex.Store({
 	mutations: {
 		admins(state){
 			const admin = uni.getStorageSync('admin');
+			console.log(admin)
 			if(admin){
 				state.admin = admin
 			}
@@ -46,7 +47,6 @@ export default new Vuex.Store({
 						console.log(res)
 						if(res.data.code==200){
 							 commit('loginStatesa', res.data)
-							
 						}else{
 							// 清除缓存
 							uni.clearStorage('token');

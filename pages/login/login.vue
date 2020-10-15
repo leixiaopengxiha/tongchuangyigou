@@ -76,7 +76,6 @@
 	
 		methods: {
 			messa(succe,messages){
-				
 				this.succe=succe;
 				this.messages=messages;
 				this.$refs.popup.open()
