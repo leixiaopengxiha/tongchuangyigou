@@ -1,6 +1,6 @@
 <template>
 	<view>
-		taohuo
+		服饰鞋包
 	</view>
 </template>
 

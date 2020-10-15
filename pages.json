@@ -22,7 +22,8 @@
         ,{
             "path" : "pages/square/square",
             "style" : {
-				"navigationBarTitleText":"广场"
+				"navigationBarTitleText":"广场",
+				"enablePullDownRefresh":true
 			}
         }
         ,{
@@ -35,6 +36,30 @@
             "path" : "pages/mys/mys",
             "style" : {
 				"navigationBarTitleText":"我的"
+			}
+        }
+        ,{
+            "path" : "components/thtj-product/thtj-product",
+            "style" : {
+				"navigationBarTitleText":"产品详情"
+			}
+        }
+        ,{
+            "path" : "components/httj-img/httj-img",
+            "style" : {
+				"navigationBarTitleText":"话题详情"
+			}
+        }
+        ,{
+            "path" : "components/gy-hd/gy-hd",
+            "style" : {
+				"navigationBarTitleText":"活动详情"
+			}
+        }
+        ,{
+            "path" : "components/gy-new/gy-new",
+            "style" : {
+				"navigationBarTitleText":"新闻详情"
 			}
         }
     ],
