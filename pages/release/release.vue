@@ -22,12 +22,13 @@
 </template>
 
 <script>
+	import {apiUrl} from '../../aip/index.js'
 	export default {
 		data() {
 			return {}
 		},
-		methods: {
-			tuor() {
+		methods: {	
+			tuor() {                                                                                                                                                                                                                                                                 
 				uni.switchTab({
 					url: '/pages/homes/homes'
 				});
@@ -42,11 +43,7 @@
 					url: '/components/uni-release-topic/uni-release-topic'
 				})
 			},
-			// fenlei(){
-			// 	uni.navigateTo({
-			// 		url: '/components/uni-home-sort/uni-home-sort'
-			// 	})
-			// }
+		
 		}
 	}
 </script>

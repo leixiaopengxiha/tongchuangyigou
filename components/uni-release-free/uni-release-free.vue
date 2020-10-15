@@ -13,7 +13,6 @@
 			</view>
 		</view>
 		<view class="" v-if='!show'>
-
 			<view class="select" @click="addTitle">
 				<text class="pre">添加标签</text>
 				<view class="jiantou">
@@ -22,8 +21,8 @@
 				<text class="label">{{label}}</text>
 			</view>
 			<view class="midBox">
-				<text class="add">添加照片</text></br>
-				<text class="more">照片越详细越容易被人光顾呦~</text>
+				<input type="text" placeholder="添加标题" :value="addText" class="add" @input="addIntro" /></br>
+				<textarea :value="contentVal" placeholder="照片越详细越容易被人光顾呦~" @input="addcontentVal" class="more" />
 				<view class="imgBox">
 					<view class="smallImg" v-for='(item,index) in showImg' :key='index'>
 						<image :src="item.url" mode=""></image>
@@ -32,10 +31,10 @@
 				</view>
 			</view>
 			<view class="price">
-				<text class="pre">预计价格</text>
-				<text class="money">￥300</text>
+				<text class="pre" style="float: left;">预计价格</text>
+				<input class="money" style="float: right;margin-top:2vh;" type="text" :value="this.price" placeholder="$" @input="addMoney"/>
 			</view>
-			<button type="default" class="btn">提交</button>
+			<button type="default" class="btn" @click="public">提交</button>
 		</view>
 	</view>
 </template>
@@ -45,23 +44,12 @@
 		components: {},
 		data() {
 			return {
-				showImg: [{
-						'url': '../../static/img/xie@3x.png',
-						'id': 1
-					},
-					{
-						'url': '../../static/img/xie2@3x.png',
-						'id': 2
-					}, {
-						'url': '../../static/img/xie3@3x.png',
-						'id': 3
-					}, {
-						'url': '../../static/img/xie1@3x.png',
-						'id': 4
-					},
-				],
+				price:'',
+				showImg: [],
 				label: '无',
 				show: false,
+				contentVal:'',
+				addText:'',
 				shopType: [{
 					'url': '../../static/img/gongjv@3x.png',
 					'text': '生活百货'
@@ -90,6 +78,19 @@
 			}
 		},
 		methods: {
+			// 添加标题
+			addIntro(event){
+				this.addText= event.target.value;
+			},
+			// 添加价格
+			addMoney(event){
+				this.price= event.target.value;
+			},
+			// 添加描述
+			addcontentVal(event){
+				this.contentVal= event.target.value;
+			},
+			// 显示发布页面
 			fanhui() {
 				this.show = !this.show;
 			},
@@ -103,28 +104,70 @@
 			},
 			chooseImg() {
 				var _this = this;
-				count: 9,
 					uni.chooseImage({
+						count: 9,
+						sizeType:['compressed'],
 						success: (res) => {
 							var tempFilePaths = res.tempFilePaths;
 							// console.log(res)
-							if(tempFilePaths){
-								_this.showImg=[]
-							}
 							for (var i = 0; i < tempFilePaths.length; i++) {
-								uni.saveFile({
-									tempFilePath: tempFilePaths[i],
-									success: (res) => {
-										var savedFilePath = res.savedFilePath;
-										_this.showImg.push({
-											id: _this.showImg.length - 1,
-											url: savedFilePath
-										})
+								uni.uploadFile({
+									url:" http://132.232.89.22:8848/uploadphoto",
+									filePath: tempFilePaths[i],
+									name:'file',
+									formData:{
+										username:'18911613884',
+									},
+									success: (uploadFileRes) => {
+										console.log(res)
+										if(i == tempFilePaths.length-1){
+											_this.showImg = JSON.parse(uploadFileRes.data)
+										}
 									}
 								})
 							}
 						}
 					});
+			},
+			// 清空数组
+			onReady() {
+			    uni.request({
+					 url: 'http://132.232.89.22:8848/cleararray',
+					 method: "POST",
+					 data: {username:'18501991901'},
+					 success: (res) => {
+					  console.log(res)
+					}
+			    })
+			 },
+			   // 提交
+			public(){
+				if(this.price!=''&&this.addIntro!=''&&this.contentVal!=''){
+					uni.request({
+						url:' http://132.232.89.22:8848/releaseaside',
+						method:"POST",
+						dataType:'JSON',
+						data:{
+							"label":this.label,
+							"username":'17633617826',
+							"inputVal":this.price,
+							"typeInputVal": this.addIntro,
+							"explainInputVal":this.contentVal,
+						},
+						success(res) {
+							console.log(res.data)
+							if(res.data.code==200){
+								alert(res.data.msg)
+								uni.navigateTo({
+									url:'/pages/release/release'
+								})
+							}
+						},
+						err(err){
+							console.log(err)
+						}
+					})
+				}
 			}
 		}
 	}
@@ -166,10 +209,12 @@
 		top: 1.5vh;
 		left: 90%;
 	}
-	.jiantou>image{
+
+	.jiantou>image {
 		width: 5vw;
 		height: 2vh;
 	}
+
 	.midBox {
 		width: 90vw;
 		position: relative;
@@ -181,15 +226,17 @@
 	.add {
 		font-size: 14px;
 		margin-left: 5%;
-		height: 6vh;
-		line-height: 6vh;
+		padding-top: 3%;
+		height: 3vh;
+		line-height: 3vh;
 	}
 
 	.more {
 		font-size: 12px;
 		margin-left: 5%;
-		margin-top: 3vh;
 		color: #B2B2C9;
+		display: block;
+		height: 5vh;
 	}
 
 	.imgBox {
@@ -226,7 +273,7 @@
 		font-size: 16px;
 		line-height: 6vh;
 		position: relative;
-		top: 6vh;
+		top: 8vh;
 		left: 5vw;
 	}
 
@@ -240,6 +287,7 @@
 		position: absolute;
 		font-size: 14px;
 		right: 3%;
+		display: block;
 	}
 
 	.btn {
