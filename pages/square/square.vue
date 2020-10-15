@@ -52,7 +52,7 @@
 			},
 			onPullDownRefresh() {
 				setTimeout(function() {
-					uni.stopPullDownRefresh();
+					uni.stopPullDownRefresh()
 				}, 1000);
 			},
 			methods: {

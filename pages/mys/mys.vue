@@ -1,20 +1,24 @@
 <template>
-	<view>
-		我的
-	</view>
+	<Mys/>
 </template>
 
 <script>
+	import Mys from '@/components/mys/mys.vue'
 	export default {
-		data() {
-			return {
-				
-			}
+		name:'My',
+		components:{
+			Mys
 		},
-		methods: {
-			
-		}
+	  data() {
+	    return {
+	      
+	    }
+	  },
+	  methods: {
+	   
+	  }
 	}
+
 </script>
 
 <style>

@@ -3,11 +3,12 @@ export default {
 	onLaunch: function() {
 		console.log('App Launch');
 		uni.onTabBarMidButtonTap(function(e){
-			console.log(uni)
 			uni.redirectTo({
 			    url: '/pages/release/release'
 			});
 		})
+		this.$store.dispatch('admins')
+		this.$store.dispatch('loginStates')
 	},
 	onShow: function() {
 		console.log('App Show');
