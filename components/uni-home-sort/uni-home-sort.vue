@@ -19,9 +19,9 @@
 					<image :src="item.imgurl[0].url" mode=""></image>
 					<text class="shop">{{item.title}}</text>
 					<view class="borderBox">
-						<text style="font-size: 12px;color: #FF779D;">￥</text>
-						<text style="font-size: 16px;color: #FF779D;">{{item.price}}</text>
-						<text style="float: right;font-size: 12px;margin-top: 0.5vh;">已有{{item.follow}}人收藏</text>
+						<text style="font-size: 10px;color: #FF779D;">￥</text>
+						<text style="font-size: 12px;color: #FF779D;">{{item.price}}</text>
+						<text style="float: right;font-size: 10px;margin-top: 0.5vh;">已有{{item.follow}}人收藏</text>
 					</view>
 					<view class="user">
 						<image :src="item.photourl" class="userIcon" mode=""></image>
@@ -179,16 +179,16 @@
 
 	.userIcon {
 		float: left;
-		width: 25%;
-		height: 80%;
+		width: 1.6rem;
+		height: 1.6rem;
 		border-radius: 50%;
 		margin: 4%;
 	}
 	.userInfo{
 		width: 55%;
 		height: 80%;
-		margin-top: 3%;
-		margin-right: 8%;
+		margin-top: 2%;
+		margin-right: 10%;
 		float: right;
 	}
 	.userName{
@@ -196,6 +196,9 @@
 		height: 2vh;
 		line-height: 2vh;
 		font-size: 10px;
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
 	}
 	.fansBox{
 		width: 100%;
@@ -269,16 +272,18 @@
 
 	.flex {
 		width: 42%;
-		height: 21vh;
+		height: 25vh;
 		margin-left: 5%;
-		margin-top: 5%;
+		margin-top: 3%;
 		border-radius: 8%;
+		padding-bottom: 0.2rem;
+		overflow: hidden;
 		box-shadow: 1px 1px 1px 1px #B2B2C9;
 	}
 
 	.flex>image {
 		width: 100%;
-		height: 55%;
+		height: 60%;
 	}
 
 	.shop {
@@ -286,9 +291,12 @@
 		width: 95%;
 		height: 1.8vh;
 		margin-left: 5%;
-		line-height: 1.8vh;
-		font-size: 14px;
+		line-height: 1.5vh;
+		font-size: 12px;
 		color: #B2B2C9;
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
 	}
 
 	.borderBox {
