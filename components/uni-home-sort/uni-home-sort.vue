@@ -131,7 +131,7 @@
 				if(this.menu=='全部'){
 					this.mockDataList = this.mockData
 				}else if(this.menu=='推荐'){
-					let arr = []
+					let arr = [] 
 					for(let i=0;i<this.mockData.length;i++){
 						if(this.mockData[i].label==this.menu){
 							arr.push(this.mockData[i])
@@ -140,7 +140,7 @@
 					this.mockDataList = arr
 					arr = []
 				}else{
-					let arr = []
+					let arr = []  
 					for(let i=0;i<this.mockData.length;i++){
 						if(this.mockData[i]['sort']==this.menu){
 							arr.push(this.mockData[i])
@@ -196,7 +196,7 @@
 		height: 2vh;
 		line-height: 2vh;
 		font-size: 10px;
-		overflow: hidden;
+	overflow: hidden;
 		text-overflow:ellipsis;
 		white-space: nowrap;
 	}

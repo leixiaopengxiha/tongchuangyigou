@@ -139,6 +139,12 @@
 					"navigationBarTitleText":"消息2"
 				}
 			},
+			{
+			    "path" : "pages/news/liaotian",
+			    "style" : {
+					"navigationBarTitleText":"聊天"
+				}
+			},
       {
             "path" : "components/uni-my/edit-meas/edit-meas",
             "style" : {}

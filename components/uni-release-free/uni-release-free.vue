@@ -13,6 +13,7 @@
 			</view>
 		</view>
 		<view class="" v-if='!show'>
+			<view class="back" @click="clear">返回</view>
 			<view class="select" @click="addTitle">
 				<text class="pre">添加标签</text>
 				<view class="jiantou">
@@ -94,7 +95,20 @@
 			fanhui() {
 				this.show = !this.show;
 			},
-
+			// 返回 清空数组
+			clear() {
+				uni.request({
+				     url: 'http://132.232.89.22:8848/cleararray',
+				     method: "POST",
+				     data: {username:'18911613884'},
+				     success: (res) => {
+				      console.log(res)
+						}
+				}),
+				uni.navigateTo({
+					url: '/pages/release/release',
+				})
+			},
 			addTitle() {
 				this.show = !this.show;
 			},
@@ -109,8 +123,7 @@
 						sizeType:['compressed'],
 						success: (res) => {
 							var tempFilePaths = res.tempFilePaths;
-							// console.log(res)
-							for (var i = 0; i < tempFilePaths.length; i++) {
+							for (let i = 0; i < tempFilePaths.length; i++) {
 								uni.uploadFile({
 									url:" http://132.232.89.22:8848/uploadphoto",
 									filePath: tempFilePaths[i],
@@ -119,8 +132,7 @@
 										username:'18911613884',
 									},
 									success: (uploadFileRes) => {
-										console.log(res)
-										if(i == tempFilePaths.length-1){
+										if(i == tempFilePaths.length - 1){
 											_this.showImg = JSON.parse(uploadFileRes.data)
 										}
 									}
@@ -129,29 +141,18 @@
 						}
 					});
 			},
-			// 清空数组
-			onReady() {
-			    uni.request({
-					 url: 'http://132.232.89.22:8848/cleararray',
-					 method: "POST",
-					 data: {username:'18501991901'},
-					 success: (res) => {
-					  console.log(res)
-					}
-			    })
-			 },
 			   // 提交
 			public(){
-				if(this.price!=''&&this.addIntro!=''&&this.contentVal!=''){
+				if(this.label != ''&&this.price!=''&&this.addText!=''&&this.contentVal!=''){
 					uni.request({
-						url:' http://132.232.89.22:8848/releaseaside',
+						url:'http://132.232.89.22:8848/releaseaside',
 						method:"POST",
 						dataType:'JSON',
 						data:{
 							"label":this.label,
-							"username":'17633617826',
+							"username":'18911613884',
 							"inputVal":this.price,
-							"typeInputVal": this.addIntro,
+							"typeInputVal": this.addText,
 							"explainInputVal":this.contentVal,
 						},
 						success(res) {
@@ -168,6 +169,7 @@
 						}
 					})
 				}
+				
 			}
 		}
 	}
@@ -197,7 +199,7 @@
 		width: 90vw;
 		font-size: 20px;
 		position: relative;
-		top: 2vh;
+		top: 3vh;
 		left: 5vw;
 		height: 9vh;
 	}
@@ -218,7 +220,7 @@
 	.midBox {
 		width: 90vw;
 		position: relative;
-		top: 3vh;
+		top: 5vh;
 		left: 5vw;
 		background: #F8F8F8;
 	}
