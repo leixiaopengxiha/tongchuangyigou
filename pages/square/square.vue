@@ -23,7 +23,7 @@
 </template>
 
 <script>
-	import {baseUrl} from '@/api/index.js'
+	// import {apiUrl} from '@/aip/index.js'
 	export default {
 		name:'square',
 			data() {

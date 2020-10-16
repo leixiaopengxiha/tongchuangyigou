@@ -42,6 +42,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import {apiUrl} from '@/aip/index.js'
 export default {
 	data() {
 		return {
@@ -74,7 +75,7 @@ export default {
 		// 获取历史记录
 		onHistori() {
 			uni.request({
-				url: ' http://132.232.89.22:8848/obhistorical',
+				url: `${apiUrl}/obhistorical`,
 				method: 'post',
 				data: { username: this.admin.username },
 				success: res => {
@@ -82,6 +83,7 @@ export default {
 					if (data.length != 0) {
 						this.historyList = data[0].histori;
 					}
+					
 				}
 			});
 		},
@@ -112,7 +114,7 @@ export default {
 			// 搜索
 			console.log( this.valueText)
 			uni.request({
-				url: ' http://132.232.89.22:8848/search',
+				url: `${apiUrl}/search`,
 				method: 'post',
 				data: { content: this.valueText },
 				success: res => {
@@ -122,7 +124,7 @@ export default {
 			});
 			 // 添加历史记录
 			      uni.request({
-			        url: " http://132.232.89.22:8848/addhistorical",
+			        url: `${apiUrl}/addhistorical`,
 			        method: "post",
 			        data: { username: this.admin.username, content: this.valueText },
 			        success: (res) => {
@@ -133,7 +135,7 @@ export default {
 		// 清除历史记录
 		deleteHistory() {
 			uni.request({
-				url: 'http://132.232.89.22:8848/rehistorical', //仅为示例，并非真实接口地址。
+				url: `${apiUrl}/rehistorical`, //仅为示例，并非真实接口地址。
 				method: 'post',
 				data: { username: '18710140366' },
 				success: res => {}

@@ -1,6 +1,5 @@
 {
-  "pages": [
-    {
+  "pages": [{
       "path": "pages/index/index",
       "style": {
         "navigationBarTitleText": "启动页",
@@ -24,17 +23,17 @@
         "navigationBarTitleText": "发布"
       }
     },
-	{
-	  "path": "components/uni-home-sort/uni-home-sort",
-	  "style": {
-	    "navigationBarTitleText": "分类"
-	  }
-	},
+    {
+      "path": "components/uni-home-sort/uni-home-sort",
+      "style": {
+        "navigationBarTitleText": "分类",
+        "onReachBottomDistance": 126
+      }
+    },
     {
       "path": "pages/square/square",
       "style": {
-        "navigationBarTitleText": "广场",
-        "enablePullDownRefresh":true
+        "navigationBarTitleText": "广场"
       }
     },
     {
@@ -76,12 +75,12 @@
         "navigationBarTitleText": "个人主页"
       }
     },
-	{
-	  "path": "components/uni-my/edit-meas/edit-meas",
-	  "style": {
-	    "navigationBarTitleText": "个人信息"
-	  }
-	},
+    {
+      "path": "components/uni-my/edit-meas/edit-meas",
+      "style": {
+        "navigationBarTitleText": "个人信息"
+      }
+    },
     {
       "path": "components/uni-my/my-follow/my-follow",
       "style": {
@@ -112,13 +111,13 @@
         "navigationBarTitleText": "发布闲置"
       }
     },
-	{
-	  "path": "pages/login/login",
-	  "style": {
-	    "navigationBarTitleText": "登录",
-		"softinputNavBar": "none"
-	  }
-	},
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "softinputNavBar": "none"
+      }
+    },
     {
       "path": "pages/search/search",
       "style": {
@@ -128,43 +127,40 @@
         }
       }
     },
-	{
-			    "path" : "pages/news/move",
-			    "style" : {
-					"navigationBarTitleText":"消息1"
-				}
-			},
-			{
-			    "path" : "pages/news/square",
-			    "style" : {
-					"navigationBarTitleText":"消息2"
-				}
-      },{
-              "path" : "components/thtj-product/thtj-product",
-              "style" : {
-          "navigationBarTitleText":"产品详情"
-        }
-          }
-          ,{
-              "path" : "components/httj-img/httj-img",
-              "style" : {
-          "navigationBarTitleText":"话题详情"
-        }
-          }
-          ,{
-              "path" : "components/gy-hd/gy-hd",
-              "style" : {
-          "navigationBarTitleText":"活动详情"
-        }
-          }
-          ,{
-              "path" : "components/gy-new/gy-new",
-              "style" : {
-          "navigationBarTitleText":"新闻详情"
-        }
-          }
-      
-    ],
+    {
+      "path": "pages/news/move",
+      "style": {
+        "navigationBarTitleText": "消息1"
+      }
+    },
+    {
+      "path": "pages/news/square",
+      "style": {
+        "navigationBarTitleText": "消息2"
+      }
+    }, {
+      "path": "components/thtj-product/thtj-product",
+      "style": {
+        "navigationBarTitleText": "产品详情"
+      }
+    }, {
+      "path": "components/httj-img/httj-img",
+      "style": {
+        "navigationBarTitleText": "话题详情"
+      }
+    }, {
+      "path": "components/gy-hd/gy-hd",
+      "style": {
+        "navigationBarTitleText": "活动详情"
+      }
+    }, {
+      "path": "components/gy-new/gy-new",
+      "style": {
+        "navigationBarTitleText": "新闻详情"
+      }
+    }
+
+  ],
   "globalStyle": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-app",
@@ -178,8 +174,7 @@
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "fontSize": "13px",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/homes/homes",
         "iconPath": "static/image/shouye@2x.png",
         "selectedIconPath": "static/image/shouye@3x.png",

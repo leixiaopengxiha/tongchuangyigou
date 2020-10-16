@@ -29,12 +29,17 @@
 				全部分类
 			</view>
 		</view>
+		
+
 	</view>
 </template>
 
 <script>
+	
+
 	import {apiUrl} from '@/aip/index.js'
 	export default {
+		
 		name:'HomeTop',
 		data() {
 			return {
@@ -46,7 +51,6 @@
 		},
 		methods: {
 			onIfication(data){
-				console.log(data)
 				uni.navigateTo({
 				    url:`/components/uni-home-sort/uni-home-sort?id=${data}`
 				});

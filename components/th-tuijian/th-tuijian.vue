@@ -53,7 +53,7 @@
 
 <script>
 	import {time3} from '../timer/index.js' 
-	import {baseUrl} from '@/api/index.js'
+	import {apiUrl} from '@/aip/index.js'
 	export default {
 		
 		data() {
@@ -69,7 +69,7 @@
 		methods: {
 			getTaohuoTuijian(){
 				uni.request({
-					url:`${ baseUrl }/squaregetpanning`,
+					url:`${ apiUrl }/squaregetpanning`,
 					method:"POST",
 					success: res => {
 						this.doutaotList = res.data.data
