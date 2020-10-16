@@ -1,10 +1,6 @@
 <template>
 	<view>
-<<<<<<< HEAD:components/ht-zr/ht-zr.vue
-		789
-=======
-		s设置
->>>>>>> main:pages/setup/setup.vue
+		456
 	</view>
 </template>
 

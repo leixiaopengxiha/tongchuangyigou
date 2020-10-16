@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="top">
+		<view class="tops">
 			<scroll-view scroll-x class="top-tab">
 				<block v-for="(tabBar,index) in tabBars" :key="index">
 					<view class="top-tab-list" :class="{'active': tabIndex==index}" @tap="toggleTab(index)">
@@ -12,12 +12,10 @@
 			</scroll-view>
 		</view>
 		<!--内容区-->
-		<view class="top">
-			<swiper :current="tabIndex" @change="tabChange">
-				<swiper-item v-for="(content,index) in contentList" :key="index" >
-					<view class="swiper-item">{{content}}</view>
-				</swiper-item>
-			</swiper>
+		<view class="top-box">
+						<taohuo v-if='tabIndex===0'></taohuo>
+						<huati v-else-if='tabIndex===1'></huati>
+						<gongyi v-else></gongyi>
 		</view>
 	</view>
 	
@@ -25,20 +23,17 @@
 </template>
 
 <script>
+	import {baseUrl} from '@/api/index.js'
 	export default {
+		name:'square',
 			data() {
 				return {
+					
 					tabIndex: 0,	//选中标签栏的序列
-					contentList: [
-									"淘货",
-									"话题",
-									"公益",
-								 ],
 					tabBars:[
 						{
 							name: '淘货',
 							id: 'taohuo',
-							url:'./taohu.vue',
 						},
 						{
 							name: '话题',
@@ -50,52 +45,59 @@
 						}
 					],
 					swiperHeight: 0
-				
 				}
 			},
 			components:{
 				
 			},
-			onLoad() {
-				
-				
+			onPullDownRefresh() {
+				setTimeout(function() {
+					uni.stopPullDownRefresh()
+				}, 1000);
 			},
 			methods: {
 				toggleTab(index){
-					console.log(index)
 					this.tabIndex = index
 				},
 				//滑动切换swiper
 				tabChange(e){
-					console.log(e.detail)
 					const tabIndex = e.detail.current
 					this.tabIndex = tabIndex
-					
-				}
+				},
 			}
 		}
 </script>
 
-<style>
+<style scoped>
 .top-tab-list{
 		color: #969696;
 		font-weight: bold;
 		float: left;
 		width: 33%;
 		text-align:center;
-		
+		padding-top: 0.5rem;
+		/* font-size: 36px; */
 	}
-	.top .active{
-		color: #007AFF;
+	
+	.tops .active{
+		color: #28D2D1;
 	}
 	
 	.active .top-tab-line{
-		border-bottom: 6upx solid #007AFF;
+		padding-top: 0.5rem;
+		border-bottom: 6upx solid #28D2D1;
 		margin: auto;
-		border-radius: 20upx;
 	}
 	.top-tab{
 		border-bottom: 1upx solid #eeeeee;
 	}
-	
+		
+	.top-box{
+		width: 100vw;
+		height: 100vh;
+	}
+	.swiper-box{
+		width: 100%;
+		height: 100%;
+	}
 </style>
