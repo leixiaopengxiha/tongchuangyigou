@@ -6,7 +6,6 @@ export default {
   },
   onLaunch: function () {
     console.log("App Launch");
-    console.log(this.admin);
     let _this = this;
     uni.onTabBarMidButtonTap(function (e) {
       if (_this.admin.username) {
@@ -18,11 +17,10 @@ export default {
           content: "请先登录才能发布内容",
           success: function (res) {
             if (res.confirm) {
-             uni.switchTab({
-                 url: '/pages/mys/mys'
-             });
+              uni.switchTab({
+                url: "/pages/mys/mys",
+              });
             } else if (res.cancel) {
-
             }
           },
         });
