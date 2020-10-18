@@ -1,6 +1,7 @@
 <template>
 	<view>
 		<view class="container">
+		<view class="back" @click="clear">返回</view>
 			<view class="select">
 				<input type="text" :value="label" class="pre" placeholder="添加标签" @input="addLabel" />
 			</view>
@@ -38,16 +39,20 @@
 				this.topicArea = event.target.value;
 			},
 			// 清空数组
-			onReady() {
-			    uni.request({
-					 url: 'http://132.232.89.22:8848/cleararray',
-					 method: "POST",
-					 data: {username:'18501991901'},
-					 success: (res) => {
-					  console.log(res)
-					}
-			    })
-			 },
+			// 返回 清空数组
+			clear() {
+				uni.request({
+				     url: 'http://132.232.89.22:8848/cleararray',
+				     method: "POST",
+				     data: {username:'18911613884'},
+				     success: (res) => {
+				      console.log(res)
+						}
+				}),
+				uni.navigateTo({
+					url: '/pages/release/release',
+				})
+			},
 			   // 提交
 			 public(){
 			   	if(this.label!=''&&this.topicArea!=''){
@@ -94,38 +99,12 @@
 										console.log(i,tempFilePaths.length)
 										if(i == tempFilePaths.length-1){
 											_this.showImg = JSON.parse(uploadFileRes.data)
-										}else{
-										// console.log(_this.showImg)
 										}
 									}
 								})
 							}
 						}
 					});
-				// var _this = this;
-				//     uni.chooseImage({
-				//      count: 9,
-				//      sizeType: ['compressed'],
-				//      success: function(res) {
-				//       var tempFilePaths = res.tempFilePaths;
-				//       for (let i = -1; i < tempFilePaths.length; i++) {
-				//        uni.uploadFile({
-				//         url: 'http://132.232.89.22:8848/uploadphoto',
-				//         filePath: tempFilePaths[i],
-				//         name: 'file',
-				//         formData: {
-				//          username: '18911613884'
-				//         },
-				//         success: (uploadFileRes) => {
-				//          console.log(i,tempFilePaths.length)
-				//          if (i == tempFilePaths.length - 1) {
-				//           _this.showImg = JSON.parse(uploadFileRes.data)
-				//          }
-				//         }
-				//        });
-				//       }
-				//      }
-				//     });
 			}
 		}
 	}
@@ -134,6 +113,19 @@
 <style scoped>
 	.container {
 		width: 100vw;
+	}
+	.back {
+		height: 3vh;
+		background: #007AFF;
+		width: 10vw;
+		position: fixed;
+		z-index: 100;
+		left: 0;
+		z-index: 1000;
+		text-align: center;
+		font-size: 14px;
+		color: #EEEEEE;
+		line-height: 3vh;
 	}
 
 	.select {
