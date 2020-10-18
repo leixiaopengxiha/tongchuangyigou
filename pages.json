@@ -103,12 +103,16 @@
       "path": "components/uni-release-topic/uni-release-topic",
       "style": {
         "navigationBarTitleText": "发布主题"
+
       }
     },
     {
       "path": "components/uni-release-free/uni-release-free",
       "style": {
-        "navigationBarTitleText": "发布闲置"
+        "navigationBarTitleText": "发布闲置",
+        "app-plus": {
+          "titleNView": false
+        }
       }
     },
     {
@@ -138,6 +142,16 @@
       "style": {
         "navigationBarTitleText": "消息2"
       }
+    },
+    {
+      "path": "pages/news/liaotian",
+      "style": {
+        "navigationBarTitleText": "聊天"
+      }
+    },
+    {
+      "path": "components/uni-my/edit-meas/edit-meas",
+      "style": {}
     }, {
       "path": "components/thtj-product/thtj-product",
       "style": {

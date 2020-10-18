@@ -64,7 +64,10 @@ export default {
 	methods: {
 		// 去详情
 		onDetails(item){
-			console.log(item)
+			// console.log(item)
+			uni.navigateTo({
+			  url: `/components/thtj-product/thtj-product?taohuoInfoid=${item._id}`,
+			});
 		},
 		// 返回首页
 		onPrevious() {
@@ -112,14 +115,18 @@ export default {
 			}
 			
 			// 搜索
-			console.log( this.valueText)
 			uni.request({
 				url: `${apiUrl}/search`,
 				method: 'post',
 				data: { content: this.valueText },
 				success: res => {
 					let { data } = res.data;
-					this.searchList = data;
+					if(data.text){
+						this.searchList = [];
+					}else{
+						this.searchList = data;
+					}
+				
 				}
 			});
 			 // 添加历史记录
@@ -128,16 +135,16 @@ export default {
 			        method: "post",
 			        data: { username: this.admin.username, content: this.valueText },
 			        success: (res) => {
-			          // console.log(res.data);
+
 			        },
 			      });
 		},
 		// 清除历史记录
 		deleteHistory() {
 			uni.request({
-				url: `${apiUrl}/rehistorical`, //仅为示例，并非真实接口地址。
+				url: `${apiUrl}/rehistorical`,
 				method: 'post',
-				data: { username: '18710140366' },
+				data: { username: this.admin.username, },
 				success: res => {}
 			});
 			uni.showToast({
@@ -175,7 +182,7 @@ export default {
 
 .previous image {
 	width: 1rem;
-	height: 3.2vh;
+	height: 3vh;
 	display: block;
 	padding-top: 0.3rem;
 }

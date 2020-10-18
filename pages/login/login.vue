@@ -91,7 +91,6 @@
 							}else if(res.data.code==201){
 								this.messa('error',res.data.message)
 							}else if(res.data.code==200){
-								console.log(res)
 								uni.setStorage({
 									key: 'token',
 									data:res.data.data.token
