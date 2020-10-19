@@ -20,6 +20,14 @@
       </view>
     </view>
     <view class="fa-boxss" v-if="!show">
+		<view class="loading-boxsa" v-if='publictu'>
+		  <a-loadMore
+		    color="orangered"
+		    padding="0 0 2rem"
+		    mode="loading2"
+		    :showTitle="false"
+		  ></a-loadMore>
+		</view>
       <view class="back">
         <view @click="clear">返回</view>
         <view class="fa-box">发布闲置</view>
@@ -83,6 +91,7 @@ export default {
       showImg: [],
       label: "无",
       show: false,
+	  publictu:false,
       contentVal: "",
       addText: "",
       shopType: [
@@ -196,6 +205,8 @@ export default {
         this.addText != "" &&
         this.contentVal != ""
       ) {
+		  this.publictu = true
+		  let _this = this
         uni.request({
           url: "http://132.232.89.22:8848/releaseaside",
           method: "POST",
@@ -209,6 +220,7 @@ export default {
           },
           success(res) {
             if (res.data.code == 200) {
+				_this.publictu = false;
               uni.switchTab({
                 url: "/pages/mys/mys",
               });

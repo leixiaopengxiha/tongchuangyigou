@@ -1,9 +1,20 @@
 <template>
 	<view>
+
+		<view class="back">
+		  <view @click="clear">返回</view>
+		  <view class="fa-box">发布话题</view>
+		</view>
+		
 		<view class="container">
-		<view class="back" @click="clear">返回</view>
-			<view class="select">
-				<input type="text" :value="label" class="pre" placeholder="添加标签" @input="addLabel" />
+			
+			<view class="loading-boxsa" v-if='publictu'>
+			  <a-loadMore
+			    color="orangered"
+			    padding="0 0 2rem"
+			    mode="loading2"
+			    :showTitle="false"
+			  ></a-loadMore>
 			</view>
 			<view class="midBox">
 				<textarea :value="topicArea" placeholder="添加描述" class="more" @input="addIntro" />
@@ -19,17 +30,34 @@
 	</view>
 </template>
 <script>
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
+	import { mapState } from "vuex";
 	export default {
 		name: 'topic',
-		components: {},
+		components: {
+			uniPopupMessage,
+			uniPopup
+		},
 		data() {
 			return {
 				showImg: [],
-				label: '',
-				topicArea:''
+				topicArea:'',
+				publictu:false,
+				succe:'success',
+				messages:'ddd',
 			}
 		},
+		computed: {
+		  ...mapState(["admin"]),
+		},
 		methods: {
+			// 提示框
+			messa(succe,messages){
+				this.succe=succe;
+				this.messages=messages;
+				this.$refs.popup.open()
+			},
 			// 添加标签
 			addLabel(event){
 				this.label= event.target.value;
@@ -44,39 +72,49 @@
 				uni.request({
 				     url: 'http://132.232.89.22:8848/cleararray',
 				     method: "POST",
-				     data: {username:'18911613884'},
+				     data: {username:this.admin.username},
 				     success: (res) => {
-				      console.log(res)
+				      // console.log(res)
 						}
 				}),
-				uni.navigateTo({
-					url: '/pages/release/release',
+				uni.navigateBack({
+				  delta: 1,
+				  animationType: "none",
 				})
 			},
 			   // 提交
 			 public(){
-			   	if(this.label!=''&&this.topicArea!=''){
+			   	if(this.topicArea!=''&& this.showImg.length!==0){
+					this.publictu = true
+					let _this = this
 			   		uni.request({
 			   			url:' http://132.232.89.22:8848/releasetopic',
 			   			method:"POST",
 			   			dataType:'JSON',
 			   			data:{
-			   				"explain":this.topicArea
+			   				"explain":this.topicArea,
+							"username":this.admin.username
 			   			},
 			   			success(res) {
-			   				console.log(res.data)
 			   				if(res.data.code==200){
-			   					alert(res.data.msg)
-			   					uni.navigateTo({
-			   						url:'/pages/release/release'
+								_this.publictu = false;
+			   					uni.switchTab({
+			   						url:'/pages/homes/homes'
 			   					})
+								
 			   				}
 			   			},
 			   			err(err){
 			   				console.log(err)
 			   			}
 			   		})
-			   	}
+			   	}else{
+
+					// this.$refs.popups.open()
+					// this.succe='error';
+					// this.messages='请输入描述和图片';
+					// this.messa('error','请输入描述和图片')
+				}
 			  },
 			// 添加图片
 			chooseImg() {
@@ -87,16 +125,14 @@
 						success: (res) => {
 							let tempFilePaths = res.tempFilePaths;
 							for (let i = 0; i < tempFilePaths.length; i++) {
-								// console.log(tempFilePaths)
 								uni.uploadFile({
 									url:" http://132.232.89.22:8848/uploadphoto",
 									filePath: tempFilePaths[i],
 									name:'file',
 									formData:{
-										username:'18911613884',
+										username: this.admin.username,
 									},
 									success: (uploadFileRes) => {
-										console.log(i,tempFilePaths.length)
 										if(i == tempFilePaths.length-1){
 											_this.showImg = JSON.parse(uploadFileRes.data)
 										}
@@ -111,10 +147,49 @@
 </script>
 
 <style scoped>
+	.back {
+	  width: 100vw;
+	  height: 3.7rem;
+	  background: #007aff;
+	  padding-top: 1.9rem;
+	  position: fixed;
+	  z-index: 10;
+	  top: 0;
+	  left: 0;
+	  z-index: 1000;
+	  text-align: center;
+	  font-size: 1rem;
+	  color: #eeeeee;
+	  overflow: hidden;
+	  box-sizing: border-box;
+	  display: flex;
+	  justify-content: space-between;
+	  text-align: center;
+	  padding-left: 0.5rem;
+	}
+	.fa-box {
+	  position: fixed;
+	  z-index: -1;
+	  width: 100vw;
+	  text-align: center;
+	}
 	.container {
 		width: 100vw;
+		padding-top:4rem;
+		position: relative;
 	}
-	.back {
+	.loading-boxsa{
+		position: absolute;
+		top:0rem;
+		left: 0rem;
+		width: 100vw;
+		height:100vh;
+		background: rgba(000,000,000,0.3);
+		z-index: 20;
+		padding-top: 50vh;
+		box-sizing: border-box;
+	}
+	/* .back {
 		height: 3vh;
 		background: #007AFF;
 		width: 10vw;
@@ -126,7 +201,7 @@
 		font-size: 14px;
 		color: #EEEEEE;
 		line-height: 3vh;
-	}
+	} */
 
 	.select {
 		background: #F8F8F8;
@@ -141,21 +216,20 @@
 
 	.midBox {
 		width: 90vw;
-		position: relative;
-		top: 3vh;
-		left: 5vw;
+		margin:2rem auto;
 		background: #F8F8F8;
+		padding: 1.5rem 0;
+		box-sizing: border-box;
 	}
 
 	.more {
 		display: block;
-		width: 93%;
-		height: 5vh;
+		width: 90%;
+		margin: 0 auto;
+		padding: 0.5rem;
 		font-size: 14px;
-		position: relative;
-		left: 5%;
-		top: 1vh;
 		color: #B2B2C9;
+		border: 1px solid #FFFEFF;
 	}
 
 	.imgBox {
