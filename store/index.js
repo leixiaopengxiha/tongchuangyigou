@@ -8,11 +8,11 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		tologins(state){
-		   state.admin = {}
-		  },
+			state.admin = {}
+		},
 		admins(state){
 			const admin = uni.getStorageSync('admin');
-			console.log(admin)
+
 			if(admin){
 				state.admin = admin
 			}
@@ -37,8 +37,8 @@ export default new Vuex.Store({
 	},
 	actions: {
 		tologin({commit}){
-		   commit('tologins')
-		  },
+			commit('tologins')
+		},
 		admins({commit}){
 			commit('admins')
 		},
