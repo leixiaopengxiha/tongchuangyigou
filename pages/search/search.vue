@@ -77,18 +77,24 @@ export default {
 		},
 		// 获取历史记录
 		onHistori() {
-			uni.request({
-				url: `${apiUrl}/obhistorical`,
-				method: 'post',
-				data: { username: this.admin.username },
-				success: res => {
-					let { data } = res.data;
-					if (data.length != 0) {
-						this.historyList = data[0].histori;
+			if(this.admin.username){
+				uni.request({
+					url: `${apiUrl}/obhistorical`,
+					method: 'post',
+					data: { username: this.admin.username },
+					success: res => {
+						let { data } = res.data;
+						if (data.length != 0) {
+							this.historyList = data[0].histori;
+						}
+						
 					}
-					
-				}
-			});
+				});
+			}else{
+				// console.log('获取历史记录')
+				
+			 	this.historyList=uni.getStorageSync('historLists');
+			}
 		},
 		// 搜索事件
 		toSearch(type) {
@@ -129,29 +135,60 @@ export default {
 				
 				}
 			});
+			
 			 // 添加历史记录
-			      uni.request({
-			        url: `${apiUrl}/addhistorical`,
-			        method: "post",
-			        data: { username: this.admin.username, content: this.valueText },
-			        success: (res) => {
-
-			        },
-			      });
+			 if(this.admin.username){
+			 	uni.request({
+			 	  url: `${apiUrl}/addhistorical`,
+			 	  method: "post",
+			 	  data: { username: this.admin.username, content: this.valueText },
+			 	  success: (res) => {
+			 	
+			 	  },
+			 	});
+			 }else{
+				 let historyList= this.historyList;
+				 if(this.historyList.length!==0){
+					historyList=  this.historyList.filter(item=>item!=this.valueText)
+				 } 
+				 if(historyList.length>=10){
+					 historyList.pop()
+					 let historLists=[this.valueText,...historyList];
+					 uni.setStorage({
+					 	key:'historLists',
+						data:historLists
+					 })
+					 this.historyList = historLists
+				 }else{
+					 let historLists=[this.valueText,...historyList];
+					 uni.setStorage({
+					 	key:'historLists',
+					 	data:historLists
+					 })
+					 this.historyList = historLists
+				 }
+				 
+			 }
+			    
 		},
 		// 清除历史记录
 		deleteHistory() {
-			uni.request({
-				url: `${apiUrl}/rehistorical`,
-				method: 'post',
-				data: { username: this.admin.username, },
-				success: res => {}
-			});
-			uni.showToast({
-				title: '已删除',
-				duration: 2000
-			});
-			this.historyList = [];
+			if(this.admin.username){
+				uni.request({
+					url: `${apiUrl}/rehistorical`,
+					method: 'post',
+					data: { username: this.admin.username, },
+					success: res => {}
+				});
+				uni.showToast({
+					title: '已删除',
+					duration: 2000
+				});
+				this.historyList = [];
+			}else{
+				uni.clearStorage('historLists')
+				this.historyList = [];
+			}
 		}
 	}
 };
