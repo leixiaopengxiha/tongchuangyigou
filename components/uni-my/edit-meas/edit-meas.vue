@@ -3,10 +3,12 @@
 	
 	<view class="meas-box">
 		<label>
+			<text>用户昵称</text>
 			
 			<input class="meas-inp"  type="text"  v-model="admin.nickname"/>
 		</label>
 		<label>
+			<text>个性签名</text>
 			
 			<input class="meas-inp"   type="text"  v-model="admin.signature"/>
 		</label>
@@ -58,6 +60,12 @@
 	}
 </script>
 <style scoped>
+	label{
+		display:flex ;
+	}
+	label text{
+		margin: 23px 10px 25px 0px;
+	}
 	.meas-box{
 		width: 80%;
 		/* height: 200rpx; */

@@ -5,7 +5,8 @@
 			<uni-list-item @click="Setting_news('自动回复')">自动回复</uni-list-item>
 			<uni-list-item @click="Setting_news('系统权限')">系统权限</uni-list-item>
 			<uni-list-item @click="Setting_news('安全中心')">安全中心</uni-list-item>
-			
+	
+		
 		</uni-list>
 		<uni-list style="margin-top: 20px;">
 			<uni-list-item @click="btn">清理缓存</uni-list-item>
@@ -17,6 +18,8 @@
 		<button type="default" class="signOut" @click="signOut">退出登录</button>
 	</view>
 </template>
+
+
 
 <script>
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
@@ -61,7 +64,7 @@
 				// 清除缓存
 				uni.clearStorage('token');
 				uni.clearStorage('admin');
-			
+				this.$store.dispatch('tologin');
 				// this.$store.dispatch('admins')
 				// this.$store.dispatch('loginStates')
 				
@@ -74,6 +77,7 @@
 		}
 	}
 </script>
+
 
 <style  scoped>
 	.signOut {
