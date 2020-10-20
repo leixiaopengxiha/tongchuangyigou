@@ -41,7 +41,7 @@
                 "ad" : {}
             },
             "splashscreen" : {
-                "androidStyle" : "default",
+                "androidStyle" : "common",
                 "iosStyle" : "common",
                 "ios" : {
                     "iphone" : {
