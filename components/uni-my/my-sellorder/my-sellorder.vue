@@ -47,9 +47,9 @@
 					url:`${apiUrl}/getallbuy`,
 					method:"POST",
 					data:{username:this.admin.username,
-					transaction:2},
+					transaction:1},
 					success:({data})=>{
-						// console.log(data.data)
+						console.log(data.data)
 						this.whole = data.data
 					}
 				})
