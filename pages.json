@@ -12,6 +12,7 @@
       "path": "pages/homes/homes",
       "style": {
         "navigationBarTitleText": "首页",
+		 "enablePullDownRefresh": true,
         "app-plus": {
           "titleNView": false
         }

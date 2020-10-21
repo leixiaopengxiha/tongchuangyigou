@@ -1,25 +1,29 @@
 <template>
 	<view>
-		<homes></homes>
+		
+		<homes :key='id'></homes>
 	</view>
 </template>
 
 <script>
+	import {mapMutations} from 'vuex'
 	export default {
 		name:'home',
-		components:{
-			
-		},
 		data() {
-			return {
-
-			}
+		  return {
+			 id:0
+		  };
+		},
+		onPullDownRefresh() {
+			this.id = this.id+1
+			 setTimeout(function () {
+			      uni.stopPullDownRefresh();
+			 }, 1000);
+		},
+		computed:{
 		},
 		methods: {
-				
-			btnss(){
-				
-			},
+			...mapMutations(['homeShows']),
 			btn(){
 				uni.showModal({
 				    title: '清除launchFlag值',

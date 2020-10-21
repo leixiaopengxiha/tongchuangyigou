@@ -5,7 +5,7 @@ export default {
     ...mapState(["admin"]),
   },
   onLaunch: function () {
-    console.log("App Launch");
+    // console.log("App Launch");
     let _this = this;
     uni.onTabBarMidButtonTap(function (e) {
       if (_this.admin.username) {
@@ -30,10 +30,10 @@ export default {
     this.$store.dispatch("loginStates");
   },
   onShow: function () {
-    console.log("App Show");
+    // console.log("App Show");
   },
   onHide: function () {
-    console.log("App Hide");
+    // console.log("App Hide");
   },
 };
 </script>

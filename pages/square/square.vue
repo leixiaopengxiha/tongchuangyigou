@@ -3,7 +3,7 @@
 		<view class="tops">
 			<scroll-view scroll-x class="top-tab">
 				<block v-for="(tabBar,index) in tabBars" :key="index">
-					<view class="top-tab-list" :class="{'active': tabIndex==index}" @tap="toggleTab(index)">
+					<view class="top-tab-list" :class="{'active': squareId==index}" @tap="toggleTab(index)">
 						{{tabBar.name}}
 						<view class="top-tab-line">
 						</view>
@@ -12,9 +12,10 @@
 			</scroll-view>
 		</view>
 		<!--内容区-->
+		
 		<view class="top-box">
-						<taohuo v-if='tabIndex===0'></taohuo>
-						<huati v-else-if='tabIndex===1'></huati>
+						<taohuo v-if='squareId===0'></taohuo>
+						<huati v-else-if='squareId===1'></huati>
 						<gongyi v-else></gongyi>
 		</view>
 	</view>
@@ -23,9 +24,10 @@
 </template>
 
 <script>
-	// import {apiUrl} from '@/aip/index.js'
+	import {mapState} from 'vuex'
 	export default {
 		name:'square',
+		
 			data() {
 				return {
 					
@@ -47,22 +49,24 @@
 					swiperHeight: 0
 				}
 			},
-			components:{
-				
+			computed:{
+				...mapState(['squareId'])
 			},
 			onPullDownRefresh() {
-				setTimeout(function() {
-					uni.stopPullDownRefresh()
-				}, 1000);
+				// setTimeout(function() {
+				// 	uni.stopPullDownRefresh()
+				// }, 1000);
 			},
 			methods: {
 				toggleTab(index){
 					this.tabIndex = index
+					this.$store.dispatch('squareid',index)
 				},
 				//滑动切换swiper
 				tabChange(e){
 					const tabIndex = e.detail.current
-					this.tabIndex = tabIndex
+					// this.tabIndex = tabIndex
+					this.$store.dispatch('squareid',tabIndex)
 				},
 			}
 		}

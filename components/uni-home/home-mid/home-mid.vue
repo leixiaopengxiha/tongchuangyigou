@@ -61,15 +61,22 @@ export default {
  mounted() {
     this.getHuoque();
   },
+ updated(){
+			
+ },
   methods: {
 	 onHuati(item){
-		console.log(item) 
+		uni.navigateTo({
+		  url: `/components/httj-img/httj-img?huatiInfoid=${item._id}`,
+		});
 	 },
     onChankans() {
-      console.log("广场话题");
+	  this.$store.dispatch('squareid',1)
+	  uni.switchTab({
+	  	url:  `/pages/square/square`
+	  })
     },
     getHuoque() {
-
       uni.request({
         url: `${apiUrl}/squaregettopic`,
         method: "POST",
@@ -78,6 +85,7 @@ export default {
         },
         success: (res) => {
 		  this.listdate = res.data.data
+		
         },
         fail: (err) => {
           console.log(err);

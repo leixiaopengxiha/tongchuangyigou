@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="lch_content" v-for="item in whole">
+		<view class="lch_content" v-for="(item,index) in whole" :key='index'>
 			<view>
 				<view class="lch_content_shop">
 					<uni-icons type="shop" size="15"></uni-icons>
@@ -15,7 +15,7 @@
 				</view>
 			</view>
 			<view class="lch_content_shopmain">
-				<image :src='item.imgurl[0]'></image>
+				<image :src='item.imgurl[0].url'></image>
 				<text style="margin-right: 15px;">{{item.explain}}</text>
 				<text>{{item.money}}</text>
 			</view>
@@ -49,7 +49,7 @@
 					data:{username:this.admin.username,
 					transaction:2},
 					success:({data})=>{
-						// console.log(data.data)
+						console.log(data.data)
 						this.whole = data.data
 					}
 				})

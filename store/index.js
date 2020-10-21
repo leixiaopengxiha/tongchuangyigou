@@ -6,9 +6,11 @@ import {
 } from '@/aip/index.js'
 export default new Vuex.Store({
 	state: {
-		admin: {}
+		admin: {},
+		squareId:0,
 	},
 	mutations: {
+	
 		tologins(state) {
 			state.admin = {}
 		},
@@ -32,12 +34,16 @@ export default new Vuex.Store({
 					url: '/pages/mys/mys'
 				});
 			}
-
-
-
+		},
+		squareids(state,data){
+			state.squareId = data
 		}
+		
 	},
 	actions: {
+		squareid({commit},data){
+			commit('squareids',data)
+		},
 		tologin({
 			commit
 		}) {

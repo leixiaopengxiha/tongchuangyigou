@@ -5,25 +5,27 @@
 				<view class="aixing"> {{item.title}}</view>
 				<view @click="onChankan"> 查看更多></view>
 			 </view>
-			 <view class="img-box">
-				 <image :src="item.url"></image>
-			 </view>
-			 <view class="love-pin">
-				<view class="love-title"> <image class="imgs" src="@/static/homeimg/aixin@3x.png"></image> {{item.texttitle}}</view>
-				<view class="love-bottom">
-					<view >
-						{{item.text}}
+			<view @click="onGongyi">
+				 <view class="img-box">
+					 <image :src="item.url"></image>
+				 </view>
+				 <view class="love-pin">
+					<view class="love-title"> <image class="imgs" src="@/static/homeimg/aixin@3x.png"></image> {{item.texttitle}}</view>
+					<view class="love-bottom">
+						<view >
+							{{item.text}}
+						</view>
+						<view class="texta">
+							<uni-icons type="hand-thumbsup" size="13"></uni-icons>
+							<text>{{item.dianzan}}</text>
+							<uni-icons type="eye" size="13"></uni-icons>
+							<text>{{item.guankan}}</text>
+							<uni-icons type="chat" size="13"></uni-icons>
+							<text>{{item.comment}}</text>
+						</view>
 					</view>
-					<view class="texta">
-						<uni-icons type="hand-thumbsup" size="13"></uni-icons>
-						<text>{{item.dianzan}}</text>
-						<uni-icons type="eye" size="13"></uni-icons>
-						<text>{{item.guankan}}</text>
-						<uni-icons type="chat" size="13"></uni-icons>
-						<text>{{item.comment}}</text>
-					</view>
-				</view>
-			 </view>
+				 </view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -50,8 +52,16 @@
 		},
 		methods:{
 			onChankan(){
-				console.log('查看更多')
-			}
+				this.$store.dispatch('squareid',2)
+				uni.switchTab({
+					url:  `/pages/square/square`
+				})
+			},
+			onGongyi(){
+				uni.navigateTo({
+				  url: `/components/gy-hd/gy-hd`
+				});
+			},
 		}
 	}
 </script>
