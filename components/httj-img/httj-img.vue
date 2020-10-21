@@ -39,8 +39,8 @@
 			<view class="guanzhu">
 				关注:{{ jiaContent.follow }}
 			</view>
-			<view class="jiaguanzhu">
-				+关注
+			<view class="jiaguanzhu" @click="getguanzhu">
+				{{ msg ? '已关注' : '+关注' }}
 			</view>
 		</view>
 		<view class="quanbu">
@@ -69,7 +69,7 @@
 		<view class="footer">
 			<view class="display">
 				<view class="display_dianzan">
-					<p>点赞</p>
+					<p @click="getdianzan">{{ zan ? '已点赞' : '点赞' }}</p>
 					<uni-icons class="giveUp" type="hand-thumbsup"></uni-icons>
 				</view>
 				<view class="display_pinglun">
@@ -91,9 +91,14 @@
 <script>
 	import { apiUrl } from '../../aip/index.js'
 	import { time3 } from "../timer/index.js"
+	import {mapState} from 'vuex'
 	export default {
 		data(){
 			return {
+				// 关注
+				msg: false,
+				// 点赞
+				zan: 0,
 				// 假数据01
 				jiaContent:{},
 				// 假数据03
@@ -117,19 +122,122 @@
 						id:e.huatiInfoid
 					},
 					success: (res) => {
-						res.data.data.imgurl = res.data.data.imgurl[0].url
-						res.data.data.time = time3(res.data.data.time)
-						res.data.data.fans = res.data.data.fans.length
-						res.data.data.follow = res.data.data.follow.length
-						this.jiaContent = res.data.data
-						console.log(res.data.data)
+						const admindata = uni.getStorageSync('admin')
+						if(admindata){
+							const flag = res.data.data.thumbsArr.includes(admindata.username)
+							const flags = admindata.allfollow.includes(res.data.data.username)
+							if (flag) {
+								this.zan = 1
+							} else {
+								this.zan = 0
+							}
+							if(flags){
+								this.msg = true
+							}else{
+								this.msg = false
+							}
+						}
+						if (res.data) {
+							res.data.data.imgurl = res.data.data.imgurl[0].url
+							res.data.data.time = time3(res.data.data.time)
+							res.data.data.fans = res.data.data.fans.length
+							res.data.data.follow = res.data.data.follow.length
+							this.jiaContent = res.data.data
+							setTimeout(() => {
+								uni.hideLoading()
+							}, 2000)
+						}
 					},
 					fail: (err) => {
-						console.log(err)
 					}
 				})
 		},
-		methods:{}
+		computed:{
+			...mapState(['admin'])
+		},
+		methods: {
+			  // 加关注接口
+			  getguanzhu() {
+			  	if (!this.admin.username) {
+			  		uni.showModal({
+			  			title: "提示",
+			  			content: "您还没有登录，是否去登录页",
+			  			success: (res) => {
+			  				if (res.confirm) {
+			  					uni.navigateTo({
+			  						url: "/pages/login/login"
+			  					})
+			  				} else if (res.cancel) {
+			  					return
+			  				}
+			  			}
+			  		})
+			  	} else {
+			  		uni.request({
+			  			url: `${ apiUrl }/followbtn`,
+			  			method: "POST",
+			  			data: {
+			  				"username": this.admin.username,
+			  				"tousername": this.jiaContent.username
+			  			},
+			  			success: (res) => {
+							this.$store.dispatch("loginStates");
+			  			}
+			  		})
+			  		this.msg = 1
+			  	}
+			  },
+			  // 点赞接口
+			  getdianzan() {
+			  
+			  	if (!this.admin.username) {
+			  		uni.showModal({
+			  			title: "提示",
+			  			content: "您还没有登录，是否去登录页",
+			  			success: (res) => {
+			  				if (res.confirm) {
+			  					uni.navigateTo({
+			  						url: "/pages/login/login"
+			  					})
+			  				} else if (res.cancel) {
+			  					return
+			  				}
+			  			}
+			  		})
+			  	} else {
+			  		if(this.zan){
+						
+			  			uni.request({
+			  				url: `${ apiUrl }/squarethumbscount`,
+			  				method: "POST",
+			  				data: {
+			  					"id": this.jiaContent._id,
+			  					"username": this.admin.username,
+			  					"thumbs_flag": 0
+			  				},
+			  				success: (res) => {
+								this.$store.dispatch("loginStates");
+			  					this.zan = 0
+			  				}
+			  			})
+			  		}else{
+					
+			  			uni.request({
+			  				url: `${ apiUrl }/squarethumbscount`,
+			  				method: "POST",
+			  				data: {
+			  					id:  this.jiaContent._id,
+			  					username: this.admin.username,
+			  					thumbs_flag: 1
+			  				},
+			  				success: (res) => {
+			  					this.zan = 1
+			  				}
+			  			})
+			  		}
+			  	}
+			  }
+		},
 	}
 </script>
 
@@ -142,6 +250,7 @@
 	padding: 30rpx;
 	box-shadow: 0px 0px 0px 3px #F9F9F9;
 	overflow: hidden;
+	padding: 1rpx;
 	.ReleaseTime{
 		float: right;
 		font-size: 12px;
@@ -191,6 +300,8 @@
 	padding: 30rpx;
 	box-shadow: 0px 0px 0px 3px #F9F9F9;
 	overflow: hidden;
+	border-radius: 5%;
+	padding: 1rpx;
 	.touxiang{
 		width: 60px;
 		height: 60px;
@@ -234,7 +345,8 @@
 	width: 90%;
 	height: 20px;
 	margin: 15px auto;
-	// background-color: #007AFF;
+	border-radius: 5%;
+	padding: 1rpx;
 	.quanbu_hr{
 		float: left;
 		width: 5px;
@@ -301,6 +413,8 @@
 	border-radius: 25rpx;
 	padding: 30rpx;
 	box-shadow: 0px 0px 0px 3px #F9F9F9;
+	border-radius: 5%;
+	padding: 1rpx;
 	overflow: hidden;
 	.display{
 		width: 100%;
