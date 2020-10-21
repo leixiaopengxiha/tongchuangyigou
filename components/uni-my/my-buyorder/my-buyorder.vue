@@ -63,7 +63,7 @@
 				uni.request({
 					url:`${apiUrl}/getallbuy`,
 					method:"POST",
-					data:{username:this.admin.username,transaction:2},
+					data:{username:this.admin.username,transaction:1},
 					success:({data})=>{
 						// console.log(data)
 						this.whole = data.data
@@ -80,7 +80,7 @@
 					uni.request({
 						url:`${apiUrl}/getallbuy`,
 						method:"POST",
-						data:{username:this.admin.username,transaction:2},
+						data:{username:this.admin.username,transaction:1},
 						success:({data})=>{
 							// console.log(data)
 							this.whole = data.data
@@ -91,7 +91,7 @@
 						url:`${apiUrl}/getallbuy`,
 						method:"POST",
 						data:{username:this.admin.username,
-						transaction:2,
+						transaction:1,
 						business:e.currentIndex},
 						success:({data})=>{
 							// console.log(data)

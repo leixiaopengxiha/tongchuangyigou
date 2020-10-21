@@ -57,6 +57,7 @@
 			},
 			// 点击关注按钮
 			follow(index) {
+				let _this=this;
 				console.log(index)
 				console.log(this.people)
 				uni.request({
@@ -70,11 +71,16 @@
 						data
 					}) => {
 						if (data.code == 200 || data.code == 400) {
-							this.people[index].flag = true
+							let aa = JSON.parse(JSON.stringify(this.people))
+							aa[index] = {...aa[index], flag:true}
+							this.people = aa
+							this.$store.dispatch("admins");
+							this.$store.dispatch("loginStates");
+						
 						}
 					}
 				})
-			}
+			} 
 		}
 	}
 </script>
