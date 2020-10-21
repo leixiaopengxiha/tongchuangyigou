@@ -1,49 +1,86 @@
 <template>
 	<view class="follow-box">
-		<view class="follow-context" v-for="item in people">
+		<view class="follow-context" v-for="(item,index) in people">
 			<image :src="item.photourl" mode=""></image>
 			<view class="follow-mess">
 				<text style="font-size: 5vw;">{{item.nickname}}</text>
 				<view class="follow-synopsis">{{item.signature}}</view>
 				<text style="margin-top: 1vh; color: #CCCCCC;">{{item.fans}}位粉丝</text>
 			</view>
-			<view class="follow-btn">+关注</view>
-			<!-- <view class="follow-btn" :class="item.follow==true?'':'nofollow'" @click="onchange(item)">
-				{{item.follow==true?'已关注':'+关注'}}
-			</view> -->
+			<!-- <view class="follow-btn" @click="follow()">+关注</view> -->
+			<view class="follow-btn" :class="item.flag==true?'':'nofollow'" @click="follow(index)">
+				{{item.flag==true?'已关注':'+关注'}}
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	
-	import {apiUrl} from '@/aip/index.js'
-	import {mapState} from 'vuex'
+	import {
+		apiUrl
+	} from '@/aip/index.js'
+	import {
+		mapState
+	} from 'vuex'
 	export default {
 		data() {
 			return {
-				people: []
+				people: [],
 			}
 		},
-		computed:{
+		computed: {
 			...mapState(['admin'])
 		},
 		mounted() {
-			this.qingqiu()
+			this.qingqiu();
 		},
 		methods: {
 			// 粉丝请求接口
-			qingqiu(){
+			qingqiu() {
 				uni.request({
-					url:`${apiUrl}/allfollow`,
-					method:"POST",
-					data:{username:this.admin.username},
-					success:({data})=>{
-						// console.log(data.data.fans)
-						this.people = data.data.fans
+					url: `${apiUrl}/allfans`,
+					method: "POST",
+					data: {
+						username: this.admin.username
+					},
+					success: ({
+						data
+					}) => {
+						this.people = data.data
+						const adminuserdata = uni.getStorageSync('admin');
+						for(let i=0;i<this.people.length;i++){
+							const flag = adminuserdata.allfollow.includes(this.people[i].username)
+							this.people[i].flag = flag
+						}
 					}
 				})
-			}
+			},
+			// 点击关注按钮
+			follow(index) {
+				let _this=this;
+				console.log(index)
+				console.log(this.people)
+				uni.request({
+					url: `${apiUrl}/followbtn`,
+					method: "POST",
+					data: {
+						username: this.admin.username,
+						"tousername": this.people[index].username
+					},
+					success: ({
+						data
+					}) => {
+						if (data.code == 200 || data.code == 400) {
+							let aa = JSON.parse(JSON.stringify(this.people))
+							aa[index] = {...aa[index], flag:true}
+							this.people = aa
+							this.$store.dispatch("admins");
+							this.$store.dispatch("loginStates");
+						
+						}
+					}
+				})
+			} 
 		}
 	}
 </script>
@@ -70,6 +107,7 @@
 	}
 
 	.follow-mess {
+		width: 30vw;
 		margin: 0vw 7vw 0px 4vw;
 	}
 
@@ -77,7 +115,7 @@
 		display: block;
 	}
 
-	.follow-synopsis{
+	.follow-synopsis {
 		margin-top: 1vh;
 		color: #909399;
 		/* padding: 1vw; */

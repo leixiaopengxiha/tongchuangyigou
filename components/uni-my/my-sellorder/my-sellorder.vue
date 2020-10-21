@@ -5,7 +5,7 @@
 				<view class="lch_content_shop">
 					<uni-icons type="shop" size="15"></uni-icons>
 					<text>
-						{{item.nickname}}
+						{{item.label}}
 					</text>
 					<uni-icons type="arrowright" size="15"></uni-icons>
 					
@@ -17,7 +17,7 @@
 			<view class="lch_content_shopmain">
 				<image :src='item.imgurl[0].url'></image>
 				<text style="margin-right: 15px;">{{item.explain}}</text>
-				<text>{{item.money}}</text>
+				<text>￥{{item.price}}</text>
 			</view>
 			<view v-if="item.business===1" class="lch_content_Confirm">未卖出</view>
 			<view v-if="item.business===2||item.business===3" class="lch_content_Confirm">已卖出</view>

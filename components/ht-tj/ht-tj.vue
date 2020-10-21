@@ -79,7 +79,6 @@
 				       res.data.data[i].imgurl = res.data.data[i].imgurl[0]
 				      }
 				      this.jiaItem = res.data.data
-					  console.log(this.jiaItem)
 				     },
 				     fail: err => {
 				      console.log(err)
