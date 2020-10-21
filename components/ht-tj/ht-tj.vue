@@ -1,36 +1,36 @@
 <template>
 	<view>
-			<view class="ht-tj" v-for="(tuijian,index) in tuijians" :key="index" @tap="openHuatiInfo" :data-huatiInfoid='tuijian._id'>
+			<view class="ht-tj" v-for="(item,index) in jiaItem" @tap="openHuatiInfo(item)" :data-huatiInfoid='jiaItem._id'>
 			<view class="user">
-				<image src="../../static/image/touxiang@2x.png" mode=""></image>
+				<image class="image" :src="item.photourl" mode=""></image>
 				<view class="user-name">
-					{{tuijian.userName}}
+					{{item.nickname}}
 				</view>
 				<view class="user-fensi">
-					粉丝：{{tuijian.userFensi}} 关注：{{tuijian.userGanzhu}}
+					粉丝：{{item.fans.length}} 关注：{{item.follow.length}}
 				</view>
 			</view>
 			<view class="time">
-				{{tuijian.time}}
+				{{item.time}}
 			</view>
 			<view class="img">
-				<image :src="tuijian.img" mode=""></image>
+				<image :src="item.imgurl.url" mode=""></image>
 			</view>
 			<view class="text">
-				{{tuijian.text}}
+				{{item.explain}}
 			</view>
 			<view class="dis">
 				<view class="giveUp">
 					<uni-icons class="giveUp" type="hand-thumbsup"></uni-icons>
-					{{ tuijian.dz }}
+					{{ item.thumbs }}
 				</view>
 				<view class="watch">
 					 <uni-icons class="watch" type="eye"></uni-icons>
-					 {{ tuijian.gk }}
+					 {{ item.see }}
 				</view>
 				<view class="comment">
 					 <uni-icons class="comment" type="chat"></uni-icons>
-					 {{ tuijian.ly }}
+					 {{ item.comment }}
 				</view>
 		   </view>
 		</view>
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+	import {time3} from '../timer/index.js'
+	import {apiUrl} from '@/aip/index.js'
 	export default {
 		data() {
 			return {
@@ -59,13 +61,34 @@
 						ly:'2211'
 					}
 				],
+				jiaItem:[]
 			}
 		},
+		mounted() {
+			// 页面加载完成调用获取话题接口
+			this.gethuati()
+		},
 		methods: {
-			openHuatiInfo(e){
-				let huatiInfoid = e.currentTarget.dataset.huatiInfoid
+			gethuati(){
+				uni.request({
+				     url:`${ apiUrl }/squaregettopic`,
+				     method: "POST",
+				     success: res => {
+				      for(let i = 0; i<res.data.data.length; i++){
+				       res.data.data[i].time = time3(res.data.data[i].time)
+				       res.data.data[i].imgurl = res.data.data[i].imgurl[0]
+				      }
+				      this.jiaItem = res.data.data
+					  console.log(this.jiaItem)
+				     },
+				     fail: err => {
+				      console.log(err)
+				     }
+				    })
+			},
+			openHuatiInfo(item){
 				uni.navigateTo({
-					url: '/components/httj-img/httj-img?huatiInfoid=' + huatiInfoid,
+					url: '/components/httj-img/httj-img?huatiInfoid=' + item._id,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
@@ -82,6 +105,9 @@
 	border: 1rpx solid #FFFFFF;
 	border-radius: 12px;
 	box-shadow: darkgrey 0px 0px 10px 1px;
+}
+.image{
+	border-radius: 50%;
 }
 .user{
 	width: 48vw;

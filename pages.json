@@ -102,7 +102,10 @@
     {
       "path": "components/uni-release-topic/uni-release-topic",
       "style": {
-        "navigationBarTitleText": "发布主题"
+        "navigationBarTitleText": "发布主题",
+		"app-plus": {
+		  "titleNView": false
+		}
 
       }
     },
