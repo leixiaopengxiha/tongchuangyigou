@@ -158,9 +158,10 @@
 }
 .user image{
 	border-radius: 50%;
-	width: 15%;
-	height: 7vh;
+	width: 3rem;
+	height: 3rem;
 	margin-left: 2vw;
+	margin-right: 2vw;
 	float: left;
 	
 }

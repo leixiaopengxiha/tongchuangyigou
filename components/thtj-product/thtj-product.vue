@@ -297,25 +297,24 @@ export default {
 
   .taohuo_box_nav {
     width: 90%;
-    height: 310px;
     background: #ffffff;
     box-shadow: 0px 3px 15px #cccccc;
     margin: 20px auto;
 	border-radius: 5%;
-	padding: 1rpx;
+	padding: 0.5rem;
+	box-sizing: border-box;
     .swiper {
       width: 100%;
-      height: 200px;
+      height: 34vh;
 
       .img {
-        width: 337px;
-        height: 225px;
+        height: 100%;
+	
       }
     }
 
     .taohuo_xiangqing {
       width: 100%;
-      // height: 100px;
       margin-top: 10px;
       position: relative;
 
@@ -336,7 +335,7 @@ export default {
         font-size: 12px;
         position: absolute;
         top: 20px;
-        left: 280px;
+        right: 10px;
       }
 
       .taohuo_xiangqing_conent {
@@ -348,12 +347,13 @@ export default {
 
   .taohuo_box_center {
     width: 90%;
-    height: 100px;
+    // height: 100px;
     background: #ffffff;
     box-shadow: 0px 3px 15px #cccccc;
     margin: 20px auto;
 	border-radius: 5%;
-	padding: 1rpx;
+	padding:0.5rem;
+	box-sizing: border-box;
     .taohuo_box_center_hr {
       float: left;
       width: 5px;
@@ -413,12 +413,13 @@ export default {
   }
   .taohuo_box_footer {
     width: 90%;
-    // height: 115px;
+
     background: #ffffff;
     box-shadow: 0px 3px 15px #cccccc;
     margin: 20px auto;
 	border-radius: 5%;
-	padding: 1rpx;
+	padding:0.5rem;
+	box-sizing: border-box;
     .taohuo_box_footer_hr {
       float: left;
       width: 5px;

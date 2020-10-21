@@ -2,7 +2,7 @@
 	<view>
 			<view class="ht-tj" v-for="(item,index) in jiaItem" @tap="openHuatiInfo(item)" :data-huatiInfoid='jiaItem._id'>
 			<view class="user">
-				<image class="image" :src="item.photourl" mode=""></image>
+				<image class="images" :src="item.photourl" mode=""></image>
 				<view class="user-name">
 					{{item.nickname}}
 				</view>
@@ -105,9 +105,12 @@
 	border-radius: 12px;
 	box-shadow: darkgrey 0px 0px 10px 1px;
 }
-.image{
+/* .images{
+	width: 3rem;
+	height: 2rem;
+	display: inline-block;
 	border-radius: 50%;
-}
+} */
 .user{
 	width: 48vw;
 	height: 5vh;
@@ -118,9 +121,12 @@
 	 display:inline-block;
 }
 .user image{
-	width: 27%;
-	height: 8vh;
+	width: 3rem;
+	height: 3rem;
+	display: inline-block;
 	margin-left: 2vw;
+	border-radius: 50%;
+	margin-right: 0.5rem;
 	float: left;
 	
 }
@@ -143,6 +149,7 @@
 }
 .img image{
 	height: 25vh;
+	display: block;
 }
 .text{
 	font-size: 12px;

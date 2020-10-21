@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="lch_content" v-for="(item,index) in whole" :key='index'>
+		<view class="lch_content" v-for="(item,index) in whole" :key='index' @click="onJump(item)">
 			<view>
 				<view class="lch_content_shop">
 					<uni-icons type="shop" size="15"></uni-icons>
@@ -9,9 +9,9 @@
 					</text>
 					<uni-icons type="arrowright" size="15"></uni-icons>
 					
-					<text v-if="item.business===1" style="float: right; color: #28D2D1;">未发货</text>
+					<!-- <text v-if="item.business===1" style="float: right; color: #28D2D1;">未发货</text>
 					<text v-if="item.business===2" style="float: right; color: #28D2D1;">未评价</text>
-					<text v-if="item.business===3" style="float: right; color: #28D2D1;">已交易</text>
+					<text v-if="item.business===3" style="float: right; color: #28D2D1;">已交易</text> -->
 				</view>
 			</view>
 			<view class="lch_content_shopmain">
@@ -19,8 +19,8 @@
 				<text style="margin-right: 15px;">{{item.explain}}</text>
 				<text>￥{{item.price}}</text>
 			</view>
-			<view v-if="item.business===1" class="lch_content_Confirm">未卖出</view>
-			<view v-if="item.business===2||item.business===3" class="lch_content_Confirm">已卖出</view>
+		<!-- 	<view v-if="item.business===1" class="lch_content_Confirm">未卖出</view>
+			<view v-if="item.business===2||item.business===3" class="lch_content_Confirm">已卖出</view> -->
 		</view>
 	</view>
 </template>
@@ -41,6 +41,11 @@
 			this.onOrder()
 		},
 		methods:{
+			onJump(item){
+				uni.navigateTo({
+				  url: `/components/thtj-product/thtj-product?taohuoInfoid=${item._id}`,
+				});
+			},
 			// 订单请求
 			onOrder(){
 				uni.request({
@@ -49,7 +54,6 @@
 					data:{username:this.admin.username,
 					transaction:2},
 					success:({data})=>{
-						console.log(data.data)
 						this.whole = data.data
 					}
 				})

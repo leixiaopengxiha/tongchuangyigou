@@ -19,6 +19,7 @@
             class="lch_content"
             v-for="(item, indexs) in whole"
             :key="indexs"
+			@click="onJump(item)"
           >
             <view>
               <view class="lch_content_shop">
@@ -88,6 +89,11 @@ export default {
     this.onOrder();
   },
   methods: {
+	  onJump(item){
+	  	uni.navigateTo({
+	  	  url: `/components/thtj-product/thtj-product?taohuoInfoid=${item._id}`,
+	  	});
+	  },
     // 订单请求
     onOrder() {
       uni.request({

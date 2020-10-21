@@ -14,6 +14,10 @@
 	      
 	    }
 	  },
+	  onShow(){
+		  this.$store.dispatch("admins");
+		  this.$store.dispatch("loginStates");
+	  },
 	  methods: {
 	   
 	  }

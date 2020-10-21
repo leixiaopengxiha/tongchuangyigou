@@ -114,6 +114,7 @@
 			}
 		},
 		onLoad(e){
+
 			//获取话题详情接口
 				uni.request({
 					url:`${ apiUrl }/squaretopicdetails`,
@@ -243,24 +244,24 @@
 
 <style lang="less" scoped>
 .box{
-	width: 80%;
+	width: 90%;
 	margin: 35rpx auto;
 	background-color: #FFFFFF;
 	border-radius: 25rpx;
-	padding: 30rpx;
 	box-shadow: 0px 0px 0px 3px #F9F9F9;
-	overflow: hidden;
-	padding: 1rpx;
+	// overflow: hidden;
+	padding: 0.3rem;
+	box-sizing: border-box;
 	.ReleaseTime{
 		float: right;
 		font-size: 12px;
 		font-weight: 700;
 		font-family: 微软雅黑;
 		color: gray;
+		padding: 0.5rem 1rem;
 	}
 	.imgage .url{
-		width: 300px;
-		height: 250px;
+		width: 100%;
 		border-radius: 25px;
 		margin-top: 5px;
 	}
@@ -292,8 +293,8 @@
 	}
 }
 .center{
-	width: 80%;
-	height: 100rpx;
+	width: 90%;
+	// height: 100rpx;
 	margin: 0rpx auto;
 	background-color: #FFFFFF;
 	border-radius: 25rpx;
@@ -301,12 +302,14 @@
 	box-shadow: 0px 0px 0px 3px #F9F9F9;
 	overflow: hidden;
 	border-radius: 5%;
-	padding: 1rpx;
+	padding: 1rem;
+	box-sizing: border-box;
 	.touxiang{
 		width: 60px;
 		height: 60px;
 		border-radius: 50px;
 		float: left;
+		margin-right: 0.5rem;
 	}
 	.mingzi{
 		font-size: 15px;

@@ -59,9 +59,8 @@ export default {
     },
     // 点击关注按钮
     follow(index) {
+		console.log('ss')
       let _this = this;
-      console.log(index);
-      console.log(this.people);
       uni.request({
         url: `${apiUrl}/followbtn`,
         method: "POST",
@@ -70,6 +69,7 @@ export default {
           tousername: this.people[index].username,
         },
         success: ({ data }) => {
+			console.log(data)
           if (data.code == 200 || data.code == 400) {
             let aa = JSON.parse(JSON.stringify(this.people));
             aa[index] = { ...aa[index], flag: true };
