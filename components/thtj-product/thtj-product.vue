@@ -199,7 +199,6 @@ export default {
       		}
       	},
       	fail: err => {
-      		console.log(err)
       	}
     });
   },
@@ -239,7 +238,6 @@ export default {
 	  // 点赞接口
 	  getdianzan() {
 	  	let b = uni.getStorageSync('admin');
-		console.log(b)
 	  	if (!b) {
 	  		uni.showModal({
 	  			title: "提示",
@@ -303,7 +301,8 @@ export default {
     background: #ffffff;
     box-shadow: 0px 3px 15px #cccccc;
     margin: 20px auto;
-
+	border-radius: 5%;
+	padding: 1rpx;
     .swiper {
       width: 100%;
       height: 200px;
@@ -353,7 +352,8 @@ export default {
     background: #ffffff;
     box-shadow: 0px 3px 15px #cccccc;
     margin: 20px auto;
-
+	border-radius: 5%;
+	padding: 1rpx;
     .taohuo_box_center_hr {
       float: left;
       width: 5px;
@@ -417,6 +417,8 @@ export default {
     background: #ffffff;
     box-shadow: 0px 3px 15px #cccccc;
     margin: 20px auto;
+	border-radius: 5%;
+	padding: 1rpx;
     .taohuo_box_footer_hr {
       float: left;
       width: 5px;
