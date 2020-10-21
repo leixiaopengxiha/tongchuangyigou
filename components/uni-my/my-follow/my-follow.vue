@@ -38,8 +38,8 @@
 					method:"POST",
 					data:{username:this.admin.username},
 					success:({data})=>{
-						// console.log(data.data.follow)
-						this.people = data.data.follow
+						// console.log(data)
+						this.people = data.data
 					}
 				})
 			}
@@ -84,6 +84,7 @@
 	}
 
 .follow-mess{
+	width: 30vw;
 	margin: 0vw 7vw 0px 4vw;
 }
 .follow-mess text{

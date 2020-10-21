@@ -25,7 +25,7 @@
 							<text>{{item.money}}</text>
 						</view>
 						
-						<view v-if="item.business===1" class="lch_content_Confirm">已签收</view>
+						<view v-if="item.business===1" class="lch_content_Confirm">未签收</view>
 						<view v-if="item.business===2" class="lch_content_Confirm">订单评价</view>
 						<view v-if="item.business===3" class="lch_content_Confirm_text">
 							<view class="">联系客服</view>
@@ -55,7 +55,7 @@
 			...mapState(['admin'])
 		},
 		mounted() {
-			this.onOrder()
+			this.onOrder()	
 		},
 		methods: {
 			// 订单请求
@@ -63,10 +63,9 @@
 				uni.request({
 					url:`${apiUrl}/getallbuy`,
 					method:"POST",
-					data:{username:this.admin.username,
-					transaction:1},
+					data:{username:this.admin.username,transaction:2},
 					success:({data})=>{
-						// console.log(data.data)
+						// console.log(data)
 						this.whole = data.data
 					}
 				})
@@ -76,46 +75,29 @@
 				if (this.tab.current !== e.currentIndex) {
 					this.tab.current = e.currentIndex;
 				}
-				// console.log(this.tab.current)
-				// 未签收
-				if(this.tab.current==1){
-						uni.request({
-							url:`${apiUrl}/getallbuy`,
-							method:"POST",
-							data:{username:this.admin.username,
-							transaction:1,
-							business:1},
-							success:({data})=>{
-								console.log(data.data)
-								this.whole = data.data
-							}
-						})
-				}else if(this.tab.current==2){
-					// 订单评价
-						uni.request({
-							url:`${apiUrl}/getallbuy`,
-							method:"POST",
-							data:{username:this.admin.username,
-							transaction:1,
-							business:2},
-							success:({data})=>{
-								console.log(data.data)
-								this.whole = data.data
-							}
-						})
-				}else if(this.tab.current==3){
-					// 申请售后
-						uni.request({
-							url:`${apiUrl}/getallbuy`,
-							method:"POST",
-							data:{username:this.admin.username,
-							transaction:1,
-							business:3},
-							success:({data})=>{
-								console.log(data.data)
-								this.whole = data.data
-							}
-						})
+				// console.log(e.currentIndex)
+				if(this.tab.current==0){
+					uni.request({
+						url:`${apiUrl}/getallbuy`,
+						method:"POST",
+						data:{username:this.admin.username,transaction:2},
+						success:({data})=>{
+							// console.log(data)
+							this.whole = data.data
+						}
+					})
+				}else {
+					uni.request({
+						url:`${apiUrl}/getallbuy`,
+						method:"POST",
+						data:{username:this.admin.username,
+						transaction:2,
+						business:e.currentIndex},
+						success:({data})=>{
+							// console.log(data)
+							this.whole = data.data
+						}
+					})			
 				}
 			}
 		}
